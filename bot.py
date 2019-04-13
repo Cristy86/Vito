@@ -16,7 +16,6 @@ async def on_ready():
     print('------')
     print(f'Username: {bot.user.name}')
     print(f'ID: {bot.user.id}')
-    print(f'Bot Version: {bot_version}')
     print(f'Active on: {len(bot.guilds)} Servers.')
     print('------')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{os.getenv('BOT_PREFIX')}help | {len(bot.users)} users."))
