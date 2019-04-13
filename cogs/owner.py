@@ -37,7 +37,7 @@ class Owner(commands.Cog):
         return content.strip('` \n')
 
     async def cog_check(self, ctx):
-        return await self.bot.is_owner(ctx.author.id)
+        return await self.bot.is_owner(ctx.author)
 
     def get_syntax_error(self, e):
         if e.text is None:
