@@ -8,6 +8,8 @@ from utils.settings import GREEN_EMBED
 from datetime import datetime
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
+bot.launch_time = datetime.utcnow()
+bot.process = psutil.Process()
 startup_extensions = ['cogs.owner','jishaku']
 
 
