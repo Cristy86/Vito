@@ -15,7 +15,7 @@ class Random(commands.Cog):
     async def random(self, ctx):
         """Chooses a random user."""
         user = random.choice(ctx.guild.members)
-        await ctx.send(f"User: {bot.get_user(user.id)}\nUser ID: {user.id}\nBot: {user.bot}\nJoined At: {user.joined_at}\nAvatar: {user.avatar_url}")
+        await ctx.send(f"User: {self.bot.get_user(user.id)}\nUser ID: {user.id}\nBot: {user.bot}\nJoined At: {user.joined_at}\nAvatar: {user.avatar_url}")
 
 
 def setup(bot):
