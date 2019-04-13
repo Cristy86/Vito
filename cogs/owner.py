@@ -18,8 +18,8 @@ from utils.settings import OWNERS, GREEN_EMBED, OTHER_ERROR_EMOJI, OTHER_SUCCESS
 import time
 from typing import Union
 
-class Admin(commands.Cog):
-    """Admin-only commands that make the bot dynamic."""
+class Owner(commands.Cog):
+    """Owner-only commands that make the bot dynamic."""
 
     def __init__(self, bot):
         self.bot = bot
@@ -225,4 +225,4 @@ class Admin(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Admin(bot))
+    bot.add_cog(Owner(bot))
