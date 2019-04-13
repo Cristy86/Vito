@@ -35,7 +35,7 @@ async def _info(ctx):
     days, hours = divmod(hours, 24)
     embed = discord.Embed(color=GREEN_EMBED)
     embed.title = "Info"
-    embed.description = f"Python Version: {platform.python_version()}\n\ndiscord.py version: {discord.__version__}\n\nMemory usage: {psutil.virtual_memory().percent} MB\n\nCPU usage: {psutil.cpu_percent()}%\n\nPing latency: {round(bot.latency * 1000)}ms\n\nOwner: {bot.get_user(bot.owner_id)}\n\nUptime: {days}d, {hours}h, {minutes}m, {seconds}s\n\nServers: {len(bot.guilds)}\n\nUsers: {len(bot.users)}"
+    embed.description = f"Python Version: {platform.python_version()}\n\ndiscord.py version: {discord.__version__}\n\nMemory usage: {psutil.virtual_memory().percent} MB\n\nCPU usage: {psutil.cpu_percent()}%\n\nPing latency: {round(bot.latency * 1000)}ms\n\nOwner: {bot.get_user(339752841612623872)}\n\nUptime: {days}d, {hours}h, {minutes}m, {seconds}s\n\nServers: {len(bot.guilds)}\n\nUsers: {len(bot.users)}"
     embed.set_footer(text=f"{bot.user.name}")
     embed.set_thumbnail(url=bot.user.avatar_url)
     embed.timestamp = datetime.utcnow()
