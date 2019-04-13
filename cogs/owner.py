@@ -141,7 +141,6 @@ class Admin(commands.Cog):
             embed = discord.Embed(color=BLACK_EMBED)
             embed.title = f"Error. <{OTHER_ERROR_EMOJI}>"
             embed.description = f'```py\n{e.__class__.__name__}: {e}\n```'
-            embed.set_footer(text=f"That took {start - end:.2f}", icon_url='https://cdn.discordapp.com/emojis/448428643543416832.png?v=1')
             embed.timestamp = datetime.datetime.utcnow()
             return await ctx.author.send(embed=embed)
 
@@ -157,7 +156,6 @@ class Admin(commands.Cog):
             embed = discord.Embed(color=BLACK_EMBED)
             embed.title = f"Error. <{OTHER_ERROR_EMOJI}>"
             embed.description = f'```py\n{value}{traceback.format_exc()}\n```'
-            embed.set_footer(text=f"That took {start - end:.2f}", icon_url='https://cdn.discordapp.com/emojis/448428643543416832.png?v=1')
             embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=embed)
         else:
@@ -174,7 +172,6 @@ class Admin(commands.Cog):
                     embed = discord.Embed(color=BLACK_EMBED)
                     embed.title = f"Success. <{OTHER_SUCCESS_EMOJI}>"
                     embed.description = f'```py\n{value}\n```'
-                    embed.set_footer(text=f"That took {start - end:.2f}", icon_url='https://cdn.discordapp.com/emojis/448428643543416832.png?v=1')
                     embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=embed)
             else:
@@ -183,7 +180,6 @@ class Admin(commands.Cog):
                 embed = discord.Embed(color=BLACK_EMBED)
                 embed.title = f"Success. <{OTHER_SUCCESS_EMOJI}>"
                 embed.description = f'```py\n{value}{ret}\n```'
-                embed.set_footer(text=f"That took {start - end:.2f}", icon_url='https://cdn.discordapp.com/emojis/448428643543416832.png?v=1')
                 embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=embed)
 
