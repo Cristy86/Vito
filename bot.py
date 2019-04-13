@@ -25,7 +25,7 @@ async def on_ready():
 
 @bot.command(name='info')
 async def _info(ctx):
-    """Shows info about the bot and the owner."""
+    """Shows info about the bot."""
     if ctx.author.bot:
         return
 
