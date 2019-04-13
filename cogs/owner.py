@@ -36,7 +36,7 @@ class Owner(commands.Cog):
         # remove `foo`
         return content.strip('` \n')
 
-    async def __local_check(self, ctx):
+    async def cog_check(self, ctx):
         return await self.bot.is_owner(ctx.author.id)
 
     def get_syntax_error(self, e):
