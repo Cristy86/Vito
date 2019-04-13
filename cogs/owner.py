@@ -226,24 +226,6 @@ class Admin(commands.Cog):
             await wait.delete()
             await ctx.send(f"<{OTHER_ERROR_EMOJI}> **The guildID might be invalid, make sure the bot is there.**\n\n```py\n{type(e).__name__}: {str(e)}\n```")
 
-    @commands.guild_only()
-    @commands.command(name="no", aliases=['die'])
-    async def _logout(self, ctx):
-        await ctx.send(f"<{OTHER_SUCCESS_EMOJI}> **`Goodbye.`**")
-        await self.bot.logout()
-
-    @commands.guild_only()
-    @commands.command(name="emoji")
-    async def _emoji(self, ctx, *, emoji: discord.Emoji):
-        emoji = self.bot.get_emoji(emoji.id)
-        url = 'https://cdn.discordapp.com/emojis/{}'
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url.format(emoji.id)) as resp:
-                if resp.status != 200:
-                    return await ctx.send('Could not download file...')
-                filename = f'emoji.{resp.content_type[6:]}'
-                await ctx.send(file=discord.File(await resp.read(), filename=filename), content=f'▫ **Name: `{emoji.name}`**\n▫ **🆔: `{emoji.id}`**\n▫ **Animated: `{emoji.animated}`**\n`{emoji}`')
-
 
 
 def setup(bot):
