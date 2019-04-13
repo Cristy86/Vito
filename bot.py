@@ -7,9 +7,6 @@ import os
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
 bot.remove_command('help')
-bot.launch_time = datetime.utcnow()
-bot.process = psutil.Process()
-bot.launch_time = datetime.utcnow()
 startup_extensions = ['cogs.eval','jishaku']
 
 
