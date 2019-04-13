@@ -6,8 +6,7 @@ import os
 
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
-bot.remove_command('help')
-startup_extensions = ['cogs.eval','jishaku']
+startup_extensions = ['cogs.owner','jishaku']
 
 
 @bot.event
