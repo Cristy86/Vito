@@ -14,7 +14,7 @@ from collections import Counter
 from platform import python_version
 import copy
 import os
-from utils.settings
+from utils.settings import OWNERS, BLACK_EMBED, OTHER_ERROR_EMOJI, OTHER_SUCCESS_EMOJI, LOADING_EMOJI
 import time
 from typing import Union
 
