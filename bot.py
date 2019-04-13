@@ -25,12 +25,17 @@ async def _info(ctx):
     if ctx.author.bot:
         return
 
-    embed = discord.Embed(color=0x00ea17)
+    delta_uptime = datetime.utcnow() - bot.launch_time
+    hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
+    minutes, seconds = divmod(remainder, 60)
+    days, hours = divmod(hours, 24)
+    embed = discord.Embed(color=GREEN_EMBED)
     embed.title = "Info"
-    embed.description = "Who is Vito?\nVito is a personal bot that is made by Cristy#0126.\nIt will be used to test things and make commands.\nCristy used to code discord.py bots now 8 months ago.\nHe started to get annoyed by being accused of coping source and many things. So he decided to code discord.js bots and leave discord.py behind. After that when starting to code discord.js bots, he did not like the coding in discord.js and many people said that discord.js sucked and he needed to code discord bots with other languages. He gave up and never started to code discord bots until he created Vito."
+    embed.description = f"Python Version: {platform.python_version()}\n\ndiscord.py version: {discord.__version__}\n\nMemory usage: {psutil.virtual_memory().percent} MB\n\nCPU usage: {psutil.cpu_percent()}%\n\nPing latency: {round(_bot.latency * 1000)}ms\n\nOwner: {_bot.get_user(_bot.owner_id)}\n\nUptime: {days}d, {hours}h, {minutes}m, {seconds}s\n\nServers: {len(bot.guilds)}\n\nUsers: {len(bot.users)}"
     embed.set_footer(text=f"{bot.user.name}")
     embed.set_thumbnail(url=bot.user.avatar_url)
-    await ctx.send(embed=embed)                                                        
+    embed.timestamp = datetime.utcnow()
+    await ctx.send(embed=embed)                                                         
                                                         
 if __name__ == "__main__":
     for extension in startup_extensions:
