@@ -37,7 +37,7 @@ class Admin(commands.Cog):
         return content.strip('` \n')
 
     async def __local_check(self, ctx):
-        return if OWNERS = True
+        return OWNERS
 
     def get_syntax_error(self, e):
         if e.text is None:
