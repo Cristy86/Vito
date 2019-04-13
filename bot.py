@@ -3,7 +3,9 @@ from discord.ext import commands
 
 import asyncio
 import os
-
+import platform, psutil
+from utils.settings import GREEN_EMBED
+from datetime import datetime
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
 startup_extensions = ['cogs.owner','jishaku']
