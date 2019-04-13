@@ -14,7 +14,7 @@ from collections import Counter
 from platform import python_version
 import copy
 import os
-from utils.settings import OWNERS, BLACK_EMBED, OTHER_ERROR_EMOJI, OTHER_SUCCESS_EMOJI, LOADING_EMOJI
+from utils.settings import OWNERS, GREEN_EMBED, OTHER_ERROR_EMOJI, OTHER_SUCCESS_EMOJI, LOADING_EMOJI
 import time
 from typing import Union
 
@@ -138,7 +138,7 @@ class Admin(commands.Cog):
             end = time.perf_counter()
             await ctx.message.remove_reaction(LOADING_EMOJI, member=ctx.me)
             await ctx.message.add_reaction(OTHER_ERROR_EMOJI)
-            embed = discord.Embed(color=BLACK_EMBED)
+            embed = discord.Embed(color=GREEN_EMBED)
             embed.title = f"Error. <{OTHER_ERROR_EMOJI}>"
             embed.description = f'```py\n{e.__class__.__name__}: {e}\n```'
             embed.timestamp = datetime.datetime.utcnow()
@@ -153,7 +153,7 @@ class Admin(commands.Cog):
             end = time.perf_counter()
             await ctx.message.remove_reaction(LOADING_EMOJI, member=ctx.me)
             await ctx.message.add_reaction(OTHER_ERROR_EMOJI)
-            embed = discord.Embed(color=BLACK_EMBED)
+            embed = discord.Embed(color=GREEN_EMBED)
             embed.title = f"Error. <{OTHER_ERROR_EMOJI}>"
             embed.description = f'```py\n{value}{traceback.format_exc()}\n```'
             embed.timestamp = datetime.datetime.utcnow()
@@ -169,7 +169,7 @@ class Admin(commands.Cog):
             if ret is None:
                 if value:
                     end = time.perf_counter()
-                    embed = discord.Embed(color=BLACK_EMBED)
+                    embed = discord.Embed(color=GREEN_EMBED)
                     embed.title = f"Success. <{OTHER_SUCCESS_EMOJI}>"
                     embed.description = f'```py\n{value}\n```'
                     embed.timestamp = datetime.datetime.utcnow()
@@ -177,7 +177,7 @@ class Admin(commands.Cog):
             else:
                 end = time.perf_counter()
                 self._last_result = ret
-                embed = discord.Embed(color=BLACK_EMBED)
+                embed = discord.Embed(color=GREEN_EMBED)
                 embed.title = f"Success. <{OTHER_SUCCESS_EMOJI}>"
                 embed.description = f'```py\n{value}{ret}\n```'
                 embed.timestamp = datetime.datetime.utcnow()
