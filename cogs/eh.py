@@ -4,8 +4,6 @@ from discord.ext import commands
 from utils.settings import ERROR_EMOJI
 import discord
 
-
-
 class CommandErrorHandler(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
