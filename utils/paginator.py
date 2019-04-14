@@ -1,53 +1,4 @@
-import discord
 import asyncio
-
-async def pager(entries, chunk int)
-    for x in range(0, len(entries), chunk)
-        yield entries[xx + chunk]
-
-
-class SimplePaginator
-
-    __slots__ = ('entries', 'extras', 'title', 'description', 'colour', 'footer', 'length', 'prepend', 'append',
-                 'fmt', 'timeout', 'ordered', 'controls', 'controller', 'pages', 'current', 'previous', 'eof', 'base',
-                 'names')
-
-    def __init__(self, kwargs)
-        self.entries = kwargs.get('entries', None)
-        self.extras = kwargs.get('extras', None)
-
-        self.title = kwargs.get('title', None)
-        self.description = kwargs.get('description', None)
-        self.colour = kwargs.get('colour', 0xffd4d4)
-        self.footer = kwargs.get('footer', None)
-
-        self.length = kwargs.get('length', 10)
-        self.prepend = kwargs.get('prepend', '')
-        self.append = kwargs.get('append', '')
-        self.fmt = kwargs.get('fmt', '')
-        self.timeout = kwargs.get('timeout', 90)
-        self.ordered = kwargs.get('ordered', False)
-
-        self.controller = None
-        self.pages = []
-        self.names = []
-        self.base = None
-
-        self.current = 0
-        self.previous = 0
-        self.eof = 0
-
-        self.controls = {'⏮' 0.0, '◀' -1, '⏹' 'stop',
-                         '▶' +1, '⏭' None}
-
-    async def indexer(self, ctx, ctrl)
-        if ctrl == 'stop'
-            ctx.bot.loop.create_task(self.stop_controller(self.base))
-
-        elif isinstance(ctrl, int)
-            self.current += ctrl
-            if self.current  self.eof or self.current  0
-                self.current -= ctrlimport asyncio
 import discord
 import inspect
 from discord.ext import commands
@@ -57,13 +8,14 @@ from typing import Union
 
 class Session:
     """Interactive session class, which uses reactions as buttons.
+
     timeout: int
         The timeout in seconds to wait for reaction responses.
     try_remove: bool
         A bool indicating whether or not the session should try to remove reactions after they have been pressed.
     """
 
-    def __init__(self,*, timeout: int=180, try_remove: bool=True):
+    def __init__(self, *, timeout: int = 180, try_remove: bool = True):
         self._buttons = {}
         self._gather_buttons()
 
@@ -80,11 +32,18 @@ class Session:
 
     def _gather_buttons(self):
         for _, member in inspect.getmembers(self):
-            if hasattr(member, '__button__'):
-                self._buttons[member.__button__[0]] = member.__button__[1]
+            if hasattr(member, '__button__'):  # Check if the member is a button...
+                self._buttons[member.__button__[2], member.__button__[0]] = member.__button__[1]  # pos, key, value
+
+    def sort_buttons(self, *, buttons: dict = None):
+        if not buttons:
+            buttons = self.buttons
+
+        return {k[1]: v for k, v in sorted(buttons.items(), key=lambda t: t[0])}
 
     async def start(self, ctx, page=None):
         """Start the session with the given page.
+
         Parameters
         -----------
         page: Optional[str, discord.Embed, discord.Message]
@@ -104,14 +63,17 @@ class Session:
         self._session_task = ctx.bot.loop.create_task(self._session(ctx))
 
     async def _session(self, ctx):
+        self.buttons = self.sort_buttons()
+
         for reaction in self.buttons.keys():
             ctx.bot.loop.create_task(self._add_reaction(reaction))
 
         while True:
             try:
-                payload = await ctx.bot.wait_for('raw_reaction_add', timeout=self.timeout, check=lambda _: self.check(_)(ctx))
+                payload = await ctx.bot.wait_for('raw_reaction_add', timeout=self.timeout,
+                                                 check=lambda _: self.check(_)(ctx))
             except asyncio.TimeoutError:
-                return await self.cancel(ctx)
+                return ctx.bot.loop.create_task(self.cancel(ctx))
 
             if self._try_remove:
                 try:
@@ -157,11 +119,13 @@ class Session:
             elif payload.user_id != ctx.author.id:
                 return False
             return True
+
         return inner
 
 
 class Paginator(Session):
     """Paginator class, that used an interactive session to display buttons.
+
     title: str
         Only available when embed=True. The title of the embeded pages.
     length: int
@@ -191,17 +155,17 @@ class Paginator(Session):
         Only available when embed=True. The thumbnail URL to set for the embeded pages.
     """
 
-    def __init__(self, *, title: str='', length: int=10, entries: list=None,
-                 extra_pages: list=None, prefix: str='', suffix: str='', format: str='',
-                 colour: Union[int, discord.Colour]=discord.Embed.Empty,
-                 color: Union[int, discord.Colour]=discord.Embed.Empty, use_defaults: bool=True, embed: bool=True,
-                 joiner: str='\n', timeout: int=180, thumbnail: str=None):
+    def __init__(self, *, title: str = '', length: int = 10, entries: list = None,
+                 extra_pages: list = None, prefix: str = '', suffix: str = '', format: str = '',
+                 colour: Union[int, discord.Colour] = discord.Embed.Empty,
+                 color: Union[int, discord.Colour] = discord.Embed.Empty, use_defaults: bool = True, embed: bool = True,
+                 joiner: str = '\n', timeout: int = 180, thumbnail: str = None):
         super().__init__()
-        self._defaults = {'⏮': partial(self._default_indexer, 'start'),
-                          '◀': partial(self._default_indexer, -1),
-                          '⏹': partial(self._default_indexer, 'stop'),
-                          '▶': partial(self._default_indexer, +1),
-                          '⏭': partial(self._default_indexer, 'end')}
+        self._defaults = {(0, '⏮'): partial(self._default_indexer, 'start'),
+                          (1, '◀'): partial(self._default_indexer, -1),
+                          (2, '⏹'): partial(self._default_indexer, 'stop'),
+                          (3, '▶'): partial(self._default_indexer, +1),
+                          (4, '⏭'): partial(self._default_indexer, 'end')}
 
         self.buttons = {}
 
@@ -279,14 +243,17 @@ class Paginator(Session):
         else:
             self.buttons = self._buttons
 
+        self.buttons = self.sort_buttons()
+
         for reaction in self.buttons.keys():
             ctx.bot.loop.create_task(self._add_reaction(reaction))
 
         while True:
             try:
-                payload = await ctx.bot.wait_for('raw_reaction_add', timeout=self.timeout, check=lambda _: self.check(_)(ctx))
+                payload = await ctx.bot.wait_for('raw_reaction_add', timeout=self.timeout,
+                                                 check=lambda _: self.check(_)(ctx))
             except asyncio.TimeoutError:
-                return await self.cancel(ctx)
+                return ctx.bot.loop.create_task(self.cancel(ctx))
 
             if self._try_remove:
                 try:
@@ -327,108 +294,28 @@ class Paginator(Session):
             await self.page.edit(content=self._pages[self._index])
 
 
-def button(emoji: str):
+def button(emoji: str, *, position: int = 666):
     """A decorator that adds a button to your interactive session class.
+
     Parameters
     -----------
     emoji: str
         The emoji to use as a button. This could be a unicode endpoint or in name:id format,
-        for custom emojis
+        for custom emojis.
+    position: int
+        The position to inject the button into.
+
     Raises
     -------
     TypeError
         The button callback is not a coroutine.
     """
+
     def deco(func):
         if not asyncio.iscoroutinefunction(func):
             raise TypeError('Button callback must be a coroutine.')
 
-        func.__button__ = (emoji, func)
+        func.__button__ = (emoji, func, position)
         return func
+
     return deco
-        else
-            self.current = int(ctrl)
-
-    async def reaction_controller(self, ctx)
-        bot = ctx.bot
-        author = ctx.author
-
-        self.base = await ctx.send(embed=self.pages[0])
-
-        if len(self.pages) == 1
-            await self.base.add_reaction('⏹')
-        else
-            for reaction in self.controls
-                try
-                    await self.base.add_reaction(reaction)
-                except discord.HTTPException
-                    return
-
-        def check(r, u)
-            if str(r) not in self.controls.keys()
-                return False
-            elif u.id == bot.user.id or r.message.id != self.base.id
-                return False
-            elif u.id != author.id
-                return False
-            return True
-
-        while True
-            try
-                react, user = await bot.wait_for('reaction_add', check=check, timeout=self.timeout)
-            except asyncio.TimeoutError
-                return ctx.bot.loop.create_task(self.stop_controller(self.base))
-
-            control = self.controls.get(str(react))
-
-            try
-                await self.base.remove_reaction(react, user)
-            except discord.HTTPException
-                pass
-
-            self.previous = self.current
-            await self.indexer(ctx, control)
-
-            if self.previous == self.current
-                continue
-
-            try
-                await self.base.edit(embed=self.pages[self.current])
-            except KeyError
-                pass
-
-    async def stop_controller(self, message)
-        try
-            await message.delete()
-        except discord.HTTPException
-            pass
-
-        try
-            self.controller.cancel()
-        except Exception
-            pass
-
-    def formmater(self, chunk)
-        return 'n'.join(f'{self.prepend}{self.fmt}{value}{self.fmt[-1]}{self.append}' for value in chunk)
-
-    async def paginate(self, ctx)
-        if self.extras
-            self.pages = [p for p in self.extras if isinstance(p, discord.Embed)]
-
-        if self.entries
-            chunks = [c async for c in pager(self.entries, self.length)]
-
-            for index, chunk in enumerate(chunks)
-                page = discord.Embed(title=f'{self.title} - {index + 1}{len(chunks)}', color=self.colour)
-                page.description = self.formmater(chunk)
-
-                if self.footer
-                    page.set_footer(text=self.footer)
-                self.pages.append(page)
-
-        if not self.pages
-            raise Exception('There must be enough data to create at least 1 page for pagination.')
-
-        self.eof = float(len(self.pages) - 1)
-        self.controls['⏭'] = self.eof
-        self.controller = ctx.bot.loop.create_task(self.reaction_controller(ctx))
