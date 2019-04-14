@@ -4,6 +4,4 @@ websockets
 Pillow
 praw
 psutil
-pyfiglet
-youtube_dl
 -e git+https://github.com/Gorialis/jishaku@master#egg=jishaku
