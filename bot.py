@@ -23,12 +23,16 @@ async def on_ready():
     print('------')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{os.getenv('BOT_PREFIX')}help | {len(bot.users)} users."))
 
+@bot.check
+async def _bot_check(ctx):
+    if user.bot:
+      return
+    else:
+      pass
+
 @bot.command(name='info')
 async def _info(ctx):
     """Shows info about the bot."""
-    if ctx.author.bot:
-        return
-
     delta_uptime = datetime.utcnow() - bot.launch_time
     hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
