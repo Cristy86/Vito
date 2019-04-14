@@ -10,7 +10,7 @@ from datetime import datetime
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
 bot.launch_time = datetime.utcnow()
 bot.process = psutil.Process()
-startup_extensions = ['cogs.owner','cogs.random','jishaku']
+startup_extensions = ['cogs.owner','cogs.random','cogs.eh','jishaku']
 
 
 @bot.event
