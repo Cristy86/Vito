@@ -4,6 +4,8 @@ from discord.ext import commands
 from utils.settings import ERROR_EMOJI
 import discord
 
+
+
 class CommandErrorHandler(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -59,6 +61,8 @@ class CommandErrorHandler(commands.Cog):
             except:
                 pass
                 
+        print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+        traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
 
 def setup(bot):
     bot.add_cog(CommandErrorHandler(bot))
