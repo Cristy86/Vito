@@ -26,34 +26,34 @@ class CommandErrorHandler(commands.Cog):
             return
 
         elif isinstance(error, commands.DisabledCommand):
-            return await ctx.send(f'{ERROR_EMOJI} {ctx.command} has been disabled.')
+            return await ctx.send(f'{ctx.command} has been disabled.')
 
         elif isinstance(error, commands.BadArgument):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
 
         elif isinstance(error, commands.CheckFailure):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
 
         elif isinstance(error, commands.CommandInvokeError):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
 
         elif isinstance(error, commands.TooManyArguments):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
         
         elif isinstance(error, commands.UserInputError):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
         
         elif isinstance(error, commands.CommandOnCooldown):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
         
         elif isinstance(error, commands.NotOwner):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
         
         elif isinstance(error, commands.MissingPermissions):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
         
         elif isinstance(error, commands.BotMissingPermissions):
-            return await ctx.send(f'{ERROR_EMOJI} {error}.')
+            return await ctx.send(f'{error}.')
 
         elif isinstance(error, commands.NoPrivateMessage):
             try:
