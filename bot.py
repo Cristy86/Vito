@@ -25,7 +25,7 @@ async def on_ready():
 
 @bot.check
 async def _bot_check(ctx):
-    if user.bot:
+    if ctx.author.bot:
       return
     else:
       pass
