@@ -15,6 +15,9 @@ class Random(commands.Cog):
     @commands.guild_only()
     async def random(self, ctx):
         """Chooses a random user."""
+        if ctx.author.bot:
+            return
+        
         user = random.choice(ctx.guild.members)
         embed = discord.Embed(color=GREEN_EMBED)
         embed.title = "Random Member"
