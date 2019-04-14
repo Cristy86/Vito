@@ -14,7 +14,7 @@ from collections import Counter
 from platform import python_version
 import copy
 import os
-from utils.settings import OWNERS, GREEN_EMBED, OTHER_ERROR_EMOJI, OTHER_SUCCESS_EMOJI, LOADING_EMOJI
+from utils.settings import OWNERS, GREEN_EMBED, ERROR_EMOJI, SUCCESS_EMOJI, LOADING_EMOJI
 import time
 from typing import Union
 
@@ -56,9 +56,9 @@ class Owner(commands.Cog):
             await asyncio.sleep(1)
             await wait.delete()
             self.bot.load_extension(extension_name)
-            await ctx.message.add_reaction(f"{OTHER_SUCCESS_EMOJI}")
+            await ctx.message.add_reaction(f"{SUCCESS_EMOJI}")
         except Exception as e:
-            await ctx.message.add_reaction(f"{OTHER_ERROR_EMOJI}")
+            await ctx.message.add_reaction(f"{ERROR_EMOJI}")
             await ctx.send(f"```py\n{type(e).__name__}: {e}\n```")
 
     @commands.command(name='unload', hidden=False)
@@ -70,9 +70,9 @@ class Owner(commands.Cog):
             await asyncio.sleep(1)
             await wait.delete()
             self.bot.unload_extension(extension_name)
-            await ctx.message.add_reaction(f"{OTHER_SUCCESS_EMOJI}")
+            await ctx.message.add_reaction(f"{SUCCESS_EMOJI}")
         except Exception as e:
-            await ctx.message.add_reaction(f"{OTHER_ERROR_EMOJI}")
+            await ctx.message.add_reaction(f"{ERROR_EMOJI}")
             await ctx.send(f"```py\n{type(e).__name__}: {e}\n```")
 
     @commands.command(name='reload', hidden=False)
@@ -85,9 +85,9 @@ class Owner(commands.Cog):
             await wait.delete()
             self.bot.unload_extension(extension_name)
             self.bot.load_extension(extension_name)
-            await ctx.message.add_reaction(f"{OTHER_SUCCESS_EMOJI}")
+            await ctx.message.add_reaction(f"{SUCCESS_EMOJI}")
         except Exception as e:
-            await ctx.message.add_reaction(f"{OTHER_ERROR_EMOJI}")
+            await ctx.message.add_reaction(f"{ERROR_EMOJI}")
             await ctx.send(f"```py\n{type(e).__name__}: {e}\n```")
 
     @commands.command()
@@ -104,7 +104,7 @@ class Owner(commands.Cog):
         fake_msg.author = member
         new_ctx = await ctx.bot.get_context(fake_msg)
         await ctx.bot.invoke(new_ctx)
-        await ctx.message.add_reaction(f"{OTHER_SUCCESS_EMOJI}")
+        await ctx.message.add_reaction(f"{SUCCESS_EMOJI}")
 
     @commands.command(hidden=False, name='eval', aliases=['exec'])
     async def _eval(self, ctx, *, body: str):
@@ -137,9 +137,9 @@ class Owner(commands.Cog):
         except Exception as e:
             end = time.perf_counter()
             await ctx.message.remove_reaction(LOADING_EMOJI, member=ctx.me)
-            await ctx.message.add_reaction(OTHER_ERROR_EMOJI)
+            await ctx.message.add_reaction(ERROR_EMOJI)
             embed = discord.Embed(color=GREEN_EMBED)
-            embed.title = f"Error. <{OTHER_ERROR_EMOJI}>"
+            embed.title = f"Error. <{ERROR_EMOJI}>"
             embed.description = f'```py\n{e.__class__.__name__}: {e}\n```'
             embed.timestamp = datetime.datetime.utcnow()
             return await ctx.author.send(embed=embed)
@@ -152,9 +152,9 @@ class Owner(commands.Cog):
             value = stdout.getvalue()
             end = time.perf_counter()
             await ctx.message.remove_reaction(LOADING_EMOJI, member=ctx.me)
-            await ctx.message.add_reaction(OTHER_ERROR_EMOJI)
+            await ctx.message.add_reaction(ERROR_EMOJI)
             embed = discord.Embed(color=GREEN_EMBED)
-            embed.title = f"Error. <{OTHER_ERROR_EMOJI}>"
+            embed.title = f"Error. <{ERROR_EMOJI}>"
             embed.description = f'```py\n{value}{traceback.format_exc()}\n```'
             embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=embed)
@@ -162,7 +162,7 @@ class Owner(commands.Cog):
             value = stdout.getvalue()
             try:
                 await ctx.message.remove_reaction(LOADING_EMOJI, member=ctx.me)
-                await ctx.message.add_reaction(OTHER_SUCCESS_EMOJI)
+                await ctx.message.add_reaction(SUCCESS_EMOJI)
             except:
                 pass
 
@@ -170,7 +170,7 @@ class Owner(commands.Cog):
                 if value:
                     end = time.perf_counter()
                     embed = discord.Embed(color=GREEN_EMBED)
-                    embed.title = f"Success. <{OTHER_SUCCESS_EMOJI}>"
+                    embed.title = f"Success. <{SUCCESS_EMOJI}>"
                     embed.description = f'```py\n{value}\n```'
                     embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=embed)
@@ -178,7 +178,7 @@ class Owner(commands.Cog):
                 end = time.perf_counter()
                 self._last_result = ret
                 embed = discord.Embed(color=GREEN_EMBED)
-                embed.title = f"Success. <{OTHER_SUCCESS_EMOJI}>"
+                embed.title = f"Success. <{SUCCESS_EMOJI}>"
                 embed.description = f'```py\n{value}{ret}\n```'
                 embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=embed)
@@ -189,7 +189,7 @@ class Owner(commands.Cog):
         os.system('cls' if os.name == 'nt' else 'clear')
         print("== Console cleared! ==")
         print("")
-        await ctx.send(f"<{OTHER_SUCCESS_EMOJI}> **Console cleared.**")
+        await ctx.send(f"<{SUCCESS_EMOJI}> **Console cleared.**")
 
     @commands.command(pass_context=True)
     async def cleanup(self, ctx, count: int):
@@ -201,7 +201,7 @@ class Owner(commands.Cog):
         wait = await ctx.send(f"<{LOADING_EMOJI}> **`Wait for result.`**")
         await asyncio.sleep(1)
         await wait.delete()
-        await ctx.send(f"<{OTHER_SUCCESS_EMOJI}> **Cleared ​`{count}​` messages.**", delete_after=5)
+        await ctx.send(f"<{SUCCESS_EMOJI}> **Cleared ​`{count}​` messages.**", delete_after=5)
 
     @commands.command(pass_context=True, hidden=True)
     async def emojis(self, ctx, *, guildID: int):
@@ -217,10 +217,10 @@ class Owner(commands.Cog):
                 await ch.send(f"`{e}` - {e.url}")
 
             await wait.delete()
-            await ctx.send(f"<{OTHER_SUCCESS_EMOJI}> **Done, `{len(g.emojis)}` emojis.**")
+            await ctx.send(f"<{SUCCESS_EMOJI}> **Done, `{len(g.emojis)}` emojis.**")
         except Exception as e:
             await wait.delete()
-            await ctx.send(f"<{OTHER_ERROR_EMOJI}> **The guildID might be invalid, make sure the bot is there.**\n\n```py\n{type(e).__name__}: {str(e)}\n```")
+            await ctx.send(f"<{ERROR_EMOJI}> **The guildID might be invalid, make sure the bot is there.**\n\n```py\n{type(e).__name__}: {str(e)}\n```")
 
 
 
