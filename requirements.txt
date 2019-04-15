@@ -3,4 +3,5 @@ aiohttp
 websockets
 praw
 psutil
+line-counter
 -e git+https://github.com/Gorialis/jishaku@master#egg=jishaku
