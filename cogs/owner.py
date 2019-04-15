@@ -106,7 +106,7 @@ class Owner(commands.Cog):
         await ctx.bot.invoke(new_ctx)
         await ctx.message.add_reaction(f"{SUCCESS_EMOJI}")
 
-    @commands.command(hidden=False, name='eval', aliases=['exec'])
+    @commands.command(hidden=True, name='eval', aliases=['exec'])
     async def _eval(self, ctx, *, body: str):
         """Evaluates a code.
         Credits: R. Danny made by Danny#0007
@@ -182,14 +182,6 @@ class Owner(commands.Cog):
                 embed.description = f'```py\n{value}{ret}\n```'
                 embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=embed)
-
-    @commands.command(pass_context=True, aliases=['clear-console','cls-c'])
-    async def console(self, ctx):
-        """Clears the console."""
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("== Console cleared! ==")
-        print("")
-        await ctx.send(f"<{SUCCESS_EMOJI}> **Console cleared.**")
 
     @commands.command(pass_context=True)
     async def cleanup(self, ctx, count: int):
