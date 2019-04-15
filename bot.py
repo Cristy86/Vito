@@ -3,13 +3,12 @@ from discord.ext import commands
 
 import asyncio
 import os
-import platform, psutil
+import platform, psutil, pkg_resources
 from utils.settings import GREEN_EMBED
 from datetime import datetime
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
 bot.launch_time = datetime.utcnow()
-bot.process = psutil.Process()
 startup_extensions = ['cogs.owner','cogs.random','cogs.eh','jishaku']
 
 
@@ -35,7 +34,7 @@ async def _info(ctx):
     days, hours = divmod(hours, 24)
     embed = discord.Embed(color=GREEN_EMBED)
     embed.title = "Info"
-    embed.description = f"Python Version: {platform.python_version()}\n\ndiscord.py version: {discord.__version__}\n\nMemory usage: {psutil.virtual_memory().percent} MB\n\nCPU usage: {psutil.cpu_percent()}%\n\nPing latency: {round(bot.latency * 1000)}ms\n\nOwner: {bot.get_user(339752841612623872)}\n\nUptime: {days}d, {hours}h, {minutes}m, {seconds}s\n\nServers: {len(bot.guilds)}\n\nUsers: {len(bot.users)}"
+    embed.description = f"Python Version: {platform.python_version()}  discord.py version: {pkg_resources.get_distribution('discord.py').version}\n\nMemory usage: {psutil.virtual_memory().percent} MB  CPU usage: {psutil.cpu_percent()}%\n\nPing latency: {round(bot.latency * 1000)}ms  Owner: {bot.get_user(339752841612623872)}\n\nUptime: {days}d, {hours}h, {minutes}m, {seconds}s  Servers: {len(bot.guilds)}\n\nUsers: {len(bot.users)}"
     embed.set_footer(text=f"{bot.user.name}")
     embed.set_thumbnail(url=bot.user.avatar_url)
     embed.timestamp = datetime.utcnow()
