@@ -223,7 +223,7 @@ class Owner(commands.Cog):
             await ctx.send(f'Incorrect block subcommand passed.')
 
     @commands.guild_only()
-    @_setgame.command()
+    @_activity.command()
     async def playing(self, ctx, *, activity: str):
         """Sets playing status in silent."""
         await self.bot.change_presence(activity=discord.Game(name=activity))
