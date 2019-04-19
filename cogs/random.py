@@ -71,7 +71,7 @@ class Random(commands.Cog):
         
         try:
             async with ctx.typing():
-                b = await self.bot.loop.run_in_executor(None, self.do_meme)
+                b = await self.bot.loop.run_in_executor(None, self.do_dankmeme)
                 await ctx.send(file=discord.File(b))
         except Exception as e:
             await ctx.message.add_reaction(ERROR_EMOJI)
