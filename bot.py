@@ -36,7 +36,7 @@ async def _stats(ctx):
     days, hours = divmod(hours, 24)
     embed = discord.Embed(color=GREEN_EMBED)
     embed.title = "Stats"
-    embed.description = f"<:python:568678201241501696> Python Version: {platform.python_version()}\n<:discord:568684907384274964> discord.py version: {pkg_resources.get_distribution('discord.py').version}\n\U0001f465 Users: {len(bot.users)}\n\U0001f3d3 Ping latency: {round(bot.latency * 1000)}ms\n\U0001f464 Owner: {bot.get_user(339752841612623872)}\n\U000023f0 Uptime: {days}d, {hours}h, {minutes}m, {seconds}s\n\U0001f4c3 Servers: {len(bot.guilds)}\nMemory usage: {psutil.virtual_memory().percent} MB\nCPU usage: {psutil.cpu_percent()}%"
+    embed.description = f"<:python:568678201241501696> Python Version: {platform.python_version()}\n\n<:discord:568684907384274964> discord.py version: {pkg_resources.get_distribution('discord.py').version}\n\n\U0001f465 Users: {len(bot.users)}\n\n\U0001f3d3 Ping latency: {round(bot.latency * 1000)}ms\n\n\U0001f464 Owner: {bot.get_user(339752841612623872)}\n\n\U000023f0 Uptime: {days}d, {hours}h, {minutes}m, {seconds}s\n\n\U0001f4c3 Servers: {len(bot.guilds)}\n\nMemory usage: {psutil.virtual_memory().percent} MB\n\nCPU usage: {psutil.cpu_percent()}%"
     embed.set_footer(text=f"{bot.user.name}")
     embed.set_thumbnail(url=bot.user.avatar_url)
     embed.timestamp = datetime.utcnow()
