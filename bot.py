@@ -22,9 +22,9 @@ async def on_ready():
     print('------')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{os.getenv('BOT_PREFIX')}help | {len(bot.users)} users."))
 
-@bot.command(name='info')
-async def _info(ctx):
-    """Shows info about the bot."""
+@bot.command(name='stats')
+async def _sats(ctx):
+    """Shows the stats about the bot."""
     if ctx.author.bot:
         return                                                    
                                                        
@@ -33,7 +33,7 @@ async def _info(ctx):
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
     embed = discord.Embed(color=GREEN_EMBED)
-    embed.title = "Info"
+    embed.title = "Stats"
     embed.description = f"Python Version: {platform.python_version()} -- discord.py version: {pkg_resources.get_distribution('discord.py').version}\n\nMemory usage: {psutil.virtual_memory().percent} MB -- CPU usage: {psutil.cpu_percent()}%\n\nPing latency: {round(bot.latency * 1000)}ms -- Owner: {bot.get_user(339752841612623872)}\n\nUptime: {days}d, {hours}h, {minutes}m, {seconds}s -- Servers: {len(bot.guilds)}\n\nUsers: {len(bot.users)}"
     embed.set_footer(text=f"{bot.user.name}")
     embed.set_thumbnail(url=bot.user.avatar_url)
