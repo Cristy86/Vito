@@ -6,12 +6,14 @@ import os
 import random
 from datetime import datetime
 from utils.settings import GREEN_EMBED
+from discord.ext.commands.cooldowns import BucketType
 
 class Random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
+    @commands.cooldown(1,5,BucketType.user)
     @commands.guild_only()
     async def random(self, ctx):
         """Chooses a random user."""
