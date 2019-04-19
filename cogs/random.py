@@ -43,9 +43,9 @@ class Random(commands.Cog):
             headers = {"Accept": "application/json"}
 
             async with aiohttp.ClientSession() as session:
-            async with session.get('https://icanhazdadjoke.com', headers=headers) as get:
-                resp = await get.json()
-                await ctx.send(f"**`{resp['joke']}`**")
+                async with session.get('https://icanhazdadjoke.com', headers=headers) as get:
+                    resp = await get.json()
+                    await ctx.send(f"**`{resp['joke']}`**")
         except Exception as e:
             await ctx.send(f"{e}")
 
