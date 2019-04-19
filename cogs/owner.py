@@ -216,8 +216,8 @@ class Owner(commands.Cog):
 
 
     @commands.guild_only()
-    @commands.group(hidden=True, name="setgame")
-    async def _setgame(self, ctx):
+    @commands.group(hidden=True, name="activity")
+    async def _activity(self, ctx):
         """A command that changes status playing and more."""
         if ctx.invoked_subcommand is None:
             await ctx.send(f'Incorrect block subcommand passed.')
