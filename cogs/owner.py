@@ -230,21 +230,21 @@ class Owner(commands.Cog):
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
     @commands.guild_only()
-    @_setgame.command()
+    @_activity.command()
     async def watching(self, ctx, *, activity: str):
         """Sets watching status in silent."""
         await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=activity))
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
     @commands.guild_only()
-    @_setgame.command()
+    @_activity.command()
     async def listening(self, ctx, *, activity: str):
         """Sets listening status in silent."""
         await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=activity))
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
     @commands.guild_only()
-    @_setgame.command()
+    @_activity.command()
     async def streaming(self, ctx, url: str, *, activity: str):
         """Sets streaming status in silent."""
         await self.bot.change_presence(activity=discord.Streaming(name=activity, url=url))
