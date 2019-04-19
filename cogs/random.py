@@ -4,6 +4,7 @@ from discord.ext import commands
 import asyncio
 import os
 import random
+import aiohttp
 from datetime import datetime
 from utils.settings import GREEN_EMBED
 from discord.ext.commands.cooldowns import BucketType
@@ -28,6 +29,25 @@ class Random(commands.Cog):
         embed.set_thumbnail(url=user.avatar_url)
         embed.timestamp = datetime.utcnow()
         await ctx.send(embed=embed)
+
+    @commands.command()
+    @commands.cooldown(1,5,BucketType.user)
+    @commands.guild_only()
+    async def dadjoke(self, ctx):
+        """Says a dad joke."""
+        if ctx.author.bot:
+            return
+        
+        try:
+
+            headers = {"Accept": "application/json"}
+
+            async with aiohttp.ClientSession() as session:
+            async with session.get('https://icanhazdadjoke.com', headers=headers) as get:
+                resp = await get.json()
+                await ctx.send(f"**`{resp['joke']}`**")
+        except Exception as e:
+            await ctx.send(f"{e}")
 
 
 def setup(bot):
