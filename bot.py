@@ -6,6 +6,7 @@ import os
 import platform, psutil, pkg_resources
 from utils.settings import GREEN_EMBED
 from datetime import datetime
+from discord.ext.commands.cooldowns import BucketType
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
 bot.launch_time = datetime.utcnow()
@@ -23,7 +24,8 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{os.getenv('BOT_PREFIX')}help | {len(bot.users)} users."))
 
 @bot.command(name='stats')
-async def _sats(ctx):
+@commands.cooldown(1,5,BucketType.user) 
+async def _stats(ctx):
     """Shows the stats about the bot."""
     if ctx.author.bot:
         return                                                    
