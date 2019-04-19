@@ -1,7 +1,6 @@
--e git+https://github.com/Rapptz/discord.py@master#egg=discord.py[voice]
+-e git+https://github.com/Rapptz/discord.py@master#egg=discord.py
 aiohttp
 websockets
 praw
 psutil
-youtube_dl
 -e git+https://github.com/Gorialis/jishaku@master#egg=jishaku
