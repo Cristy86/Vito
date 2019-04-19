@@ -215,6 +215,41 @@ class Owner(commands.Cog):
             await ctx.send(f"<{ERROR_EMOJI}> **The guildID might be invalid, make sure the bot is there.**\n\n```py\n{type(e).__name__}: {str(e)}\n```")
 
 
+    @commands.guild_only()
+    @commands.group(hidden=True, name="setgame")
+    async def _setgame(self, ctx):
+        """A command that changes status playing and more."""
+        if ctx.invoked_subcommand is None:
+            await ctx.send(f'Incorrect block subcommand passed.')
+
+    @commands.guild_only()
+    @_setgame.command()
+    async def playing(self, ctx, *, activity: str):
+        """Sets playing status in silent."""
+        await self.bot.change_presence(activity=discord.Game(name=activity))
+        await ctx.message.add_reaction(SUCCESS_EMOJI)
+
+    @commands.guild_only()
+    @_setgame.command()
+    async def watching(self, ctx, *, activity: str):
+        """Sets watching status in silent."""
+        await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=activity))
+        await ctx.message.add_reaction(SUCCESS_EMOJI)
+
+    @commands.guild_only()
+    @_setgame.command()
+    async def listening(self, ctx, *, activity: str):
+        """Sets listening status in silent."""
+        await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=activity))
+        await ctx.message.add_reaction(SUCCESS_EMOJI)
+
+    @commands.guild_only()
+    @_setgame.command()
+    async def streaming(self, ctx, url: str, *, activity: str):
+        """Sets streaming status in silent."""
+        await self.bot.change_presence(activity=discord.Streaming(name=activity, url=url))
+        await ctx.message.add_reaction(SUCCESS_EMOJI)
+
 
 def setup(bot):
     bot.add_cog(Owner(bot))
