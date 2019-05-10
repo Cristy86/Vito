@@ -31,6 +31,7 @@ class Webhook(commands.Cog):
         webhook = await self.bot.get_channel(CHANNEL1).create_webhook(name=f"Servers: {len(self.bot.guilds)}")
         
         await webhook.send(embed=embed, avatar_url=self.bot.user.avatar_url_as(format='png'))
+        await webhook.delete()
     
     @commands.Cog.listener() 
     async def on_guild_remove(self, guild):
@@ -40,6 +41,7 @@ class Webhook(commands.Cog):
         webhook = await self.bot.get_channel(CHANNEL2).create_webhook(name=f"Servers: {len(self.bot.guilds)}")
         
         await webhook.send(embed=embed, avatar_url=self.bot.user.avatar_url_as(format='png'))
+        await webhook.delete()
     
 
 def setup(bot):
