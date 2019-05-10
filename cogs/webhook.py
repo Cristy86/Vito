@@ -16,7 +16,7 @@ class Webhook(commands.Cog):
         count = sum(1 for m in guild.members if m.bot)
         embed = discord.Embed(color=GREEN_EMBED)
         embed.add_field(name="Guild ID", value=f"{guild.id}", inline=False)
-        embed.add_field(name="Members", value=f"{guild.member_count - count} - {count} bots.", inline=False)
+        embed.add_field(name="Members", value=f"{guild.member_count - count} members - {count} bots.", inline=False)
         embed.add_field(name="Owner ID", value=f"{guild.owner.id}", inline=False)
         embed.set_thumbnail(url=guild.icon_url or guild.owner.avatar_url)
         embed.set_footer(text=f'{guild.owner}', icon_url=guild.owner.avatar_url)
