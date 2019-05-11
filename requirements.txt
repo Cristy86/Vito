@@ -4,4 +4,3 @@ websockets
 praw
 psutil
 -e git+https://github.com/Gorialis/jishaku@master#egg=jishaku
--e git+https://github.com/dylanaraps/neofetch@master#egg=neofetch
