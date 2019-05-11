@@ -3,18 +3,18 @@ from discord.ext import commands
 
 import asyncio
 import os
-import random
+import random, praw
 import aiohttp
 from datetime import datetime
-from utils.settings import GREEN_EMBED, ERROR_EMOJI, REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USER_AGENT
+from utils.settings import GREEN_EMBED, ERROR_EMOJI
 from discord.ext.commands.cooldowns import BucketType
 
 class Random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.reddit = praw.Reddit(client_id="{REDDIT_CLIENT_ID}",
-                        client_secret="{REDDIT_CLIENT_SECRET}",
-                        user_agent="{REDDIT_USER_AGENT}")
+        self.reddit = praw.Reddit(client_id=os.getenv('REDDIT_CLIENT_ID'),
+                        client_secret=os.getenv('REDDIT_CLIENT_SECRET'),                        
+                        user_agent=os.getenv('REDDIT_USER_AGENT'))
         
         def do_dankmeme(self):
             memes_submissions = self.reddit.subreddit('dankmemes').hot()
