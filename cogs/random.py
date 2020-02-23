@@ -70,7 +70,7 @@ class Random(commands.Cog):
     @commands.cooldown(1,5,BucketType.user)
     @commands.guild_only()
     async def dankmeme(self, ctx):
-        """Shows a dank meme from r/dankmemes."""
+        """Shows a meme from r/memes."""
         if ctx.author.bot:
             return
         
@@ -112,8 +112,6 @@ class Random(commands.Cog):
     @commands.cooldown(1.0, 10.0, commands.BucketType.user)
     async def softwaregore(self, ctx):
         """Generates a random r/softwaregore from reddit."""
-        if ctx.author.id in BLOCKED:
-            return
         try:
             async with ctx.typing():
                 b = await self.bot.loop.run_in_executor(None, self.do_softwaregore)
