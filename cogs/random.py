@@ -22,6 +22,13 @@ class Random(commands.Cog):
          for i in range(0, post_to_pick):
             submission = next(x for x in memes_submissions if not x.stickied)
          return submission.url
+    
+    def do_softwaregore(self):
+        softwaregore_submissions = self.reddit.subreddit('softwaregore').hot()
+        post_to_pick = random.randint(1, 100)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in softwaregore_submissions if not x.stickied)
+        return submission.url
 
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
@@ -74,6 +81,48 @@ class Random(commands.Cog):
         except Exception as e:
             await ctx.message.add_reaction(ERROR_EMOJI)
             await ctx.send(f'{e}')
+                                   
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 20.0, commands.BucketType.user)
+    async def hastebin(self, ctx, *, text:str):
+        """Uploads text to Hastebin."""
+  
+        text = self.cleanup_code(text)
+        async with aiohttp.ClientSession() as session:
+            async with session.post("https://hastebin.com/documents",data=text.encode('utf-8')) as post:
+                post = await post.json()
+                await ctx.send(f"<https://hastebin.com/{post['key']}>")
 
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 20.0, commands.BucketType.user)
+    async def mystbin(self, ctx, *, text:str):
+        """Uploads text to mystb.in."""
+
+        text = self.cleanup_code(text)
+        async with aiohttp.ClientSession() as session:
+            async with session.post("http://mystb.in/documents",data=text.encode('utf-8')) as post:
+                post = await post.json()
+                await ctx.send(f"<http://mystb.in/{post['key']}>")
+
+                               
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 10.0, commands.BucketType.user)
+    async def softwaregore(self, ctx):
+        """Generates a random r/softwaregore from reddit."""
+        if ctx.author.id in BLOCKED:
+            return
+        try:
+            async with ctx.typing():
+                b = await self.bot.loop.run_in_executor(None, self.do_softwaregore)
+                embed = discord.Embed(color=GREEN_EMBED)
+                embed.set_image(url=b)
+                await ctx.send(embed=embed)
+        except Exception as e:
+            await ctx.message.add_reaction(ERROR_EMOJI)
+            await ctx.send(f'```py\n{type(e).__name__}: {str(e)}\n```')
+                               
 def setup(bot):
     bot.add_cog(Random(bot))
