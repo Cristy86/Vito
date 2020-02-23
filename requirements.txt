@@ -1,7 +1,7 @@
--e git+https://github.com/Rapptz/discord.py@master
+-e git+https://github.com/Rapptz/discord.py@master#egg=master
 aiohttp
 websockets
 praw
 psutil
--e git+https://github.com/Gorialis/jishaku@master
--e git+https://github.com/PythonistaGuild/buttons
+-e git+https://github.com/Gorialis/jishaku@master#egg=master
+-e git+https://github.com/PythonistaGuild/buttons#egg=master
