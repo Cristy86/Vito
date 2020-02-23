@@ -17,7 +17,6 @@ import random
 
 from datetime import datetime
 import psutil
-from pyfiglet import figlet_format
 from utils.constants import OTHER_ERROR_EMOJI, OTHER_SUCCESS_EMOJI 
 
 class Moderation(commands.Cog):
