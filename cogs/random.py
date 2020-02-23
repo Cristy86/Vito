@@ -100,7 +100,7 @@ class Random(commands.Cog):
   
         text = self.cleanup_code(text)
         async with aiohttp.ClientSession() as session:
-            async with session.post("https://hastebin.com/",data=text.encode('utf-8')) as post:
+            async with session.post("https://hastebin.com/") as post:
                 post = await post.json()
                 await ctx.send(f"<https://hastebin.com/{post['key']}>")
 
@@ -112,7 +112,7 @@ class Random(commands.Cog):
 
         text = self.cleanup_code(text)
         async with aiohttp.ClientSession() as session:
-            async with session.post("http://mystb.in/",data=text.encode('utf-8')) as post:
+            async with session.post("http://mystb.in/") as post:
                 post = await post.json()
                 await ctx.send(f"<http://mystb.in/{post['key']}>")
 
