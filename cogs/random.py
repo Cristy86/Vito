@@ -135,9 +135,9 @@ class Random(commands.Cog):
                 small_image_text_game = game.small_image_text
 
             perms = '\n'.join(perm for perm, value in user.guild_permissions if value)
-            days = datetime.utcnow() - humanize.naturaldate(user.created_at)
+            days = datetime.utcnow() - user.created_at
 
-            days2 = datetime.utcnow() - humanize.naturaldate(user.joined_at)
+            days2 = datetime.utcnow() - user.joined_at
 
             embed = discord.Embed(color=user.color.value)
             embed.title = f"`- - {user} - -`"
@@ -164,9 +164,9 @@ class Random(commands.Cog):
             game = user.activity
 
             perms = '\n'.join(perm for perm, value in user.guild_permissions if value)
-            days = datetime.utcnow() - humanize.naturaldate(user.created_at)
+            days = datetime.utcnow() - user.created_at
 
-            days2 = datetime.utcnow() - humanize.naturaldate(user.joined_at)
+            days2 = datetime.utcnow() - user.joined_at
 
             embed = discord.Embed(color=user.color.value)
             embed.title = f"`- - {user} - -`"
