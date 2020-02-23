@@ -17,7 +17,7 @@ class Random(commands.Cog):
                         user_agent=os.getenv('REDDIT_USER_AGENT'))
         
         def do_dankmeme(self):
-            memes_submissions = self.reddit.subreddit('dankmemes').hot()
+            memes_submissions = self.reddit.subreddit('memes').hot()
             post_to_pick = random.randint(1, 100)
             for i in range(0, post_to_pick):
                 submission = next(x for x in memes_submissions if not x.stickied)
