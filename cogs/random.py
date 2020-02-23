@@ -92,29 +92,6 @@ class Random(commands.Cog):
             await ctx.message.add_reaction(ERROR_EMOJI)
             await ctx.send(f'{e}')
                                    
-    @commands.command()
-    @commands.guild_only()
-    @commands.cooldown(1.0, 20.0, commands.BucketType.user)
-    async def hastebin(self, ctx, *, text:str):
-        """Uploads text to Hastebin."""
-  
-        text = self.cleanup_code(text)
-        async with aiohttp.ClientSession() as session:
-            async with session.post("https://hastebin.com/") as post:
-                post = await post.json()
-                await ctx.send(f"<https://hastebin.com/{post['key']}>")
-
-    @commands.command()
-    @commands.guild_only()
-    @commands.cooldown(1.0, 20.0, commands.BucketType.user)
-    async def mystbin(self, ctx, *, text:str):
-        """Uploads text to mystb.in."""
-
-        text = self.cleanup_code(text)
-        async with aiohttp.ClientSession() as session:
-            async with session.post("http://mystb.in/") as post:
-                post = await post.json()
-                await ctx.send(f"<http://mystb.in/{post['key']}>")
 
                                
     @commands.command()
