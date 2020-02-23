@@ -15,6 +15,16 @@ class Random(commands.Cog):
         self.reddit = praw.Reddit(client_id=os.getenv('REDDIT_CLIENT_ID'),
                         client_secret=os.getenv('REDDIT_CLIENT_SECRET'),                        
                         user_agent=os.getenv('REDDIT_USER_AGENT'))
+    
+    def cleanup_code(self, content):
+        """Automatically removes code blocks from the code."""
+        # remove ```py\n```
+        if content.startswith('```') and content.endswith('```'):
+            return '\n'.join(content.split('\n')[1:-1])
+
+        # remove `foo`
+        return content.strip('` \n')
+
         
     def meme(self):
          memes_submissions = self.reddit.subreddit('memes').hot()
