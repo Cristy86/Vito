@@ -6,6 +6,7 @@ import asyncio
 import os
 import random, praw
 import aiohttp
+import humanize
 from datetime import datetime
 from utils.settings import GREEN_EMBED, ERROR_EMOJI
 from discord.ext.commands.cooldowns import BucketType
@@ -134,13 +135,13 @@ class Random(commands.Cog):
                 small_image_text_game = game.small_image_text
 
             perms = '\n'.join(perm for perm, value in user.guild_permissions if value)
-            days = datetime.utcnow() - user.created_at
+            days = datetime.utcnow() - humanize.naturaldate(user.created_at)
 
-            days2 = datetime.utcnow() - user.joined_at
+            days2 = datetime.utcnow() - humanize.naturaldate(user.joined_at)
 
             embed = discord.Embed(color=user.color.value)
             embed.title = f"`- - {user} - -`"
-            embed.description = f":white_small_square: **Joined at:** **{user.joined_at.strftime('%a %b %d %Y at %I:%M %p')} [`{days2.days} Days.`]**\n:white_small_square: **Status:** **`{user.status}`**\n:white_small_square: **Top Role:** **`{user.top_role.name}`**\n:white_small_square: **Roles:** {','.join([role.name for role in user.roles])}\n:white_small_square: **Playing:** **`{game}`**\n:white_small_square: **Is bot:** **`{user.bot if user.bot else 'False'}`**\n:white_small_square: **ID:** **`{user.id}`**\n:white_small_square: **Created at:** **{user.created_at.strftime('%a %b %d %Y at %I:%M %p')} [`{days.days} Days.`]**"
+            embed.description = f":white_small_square: **Joined at:** **{humanize.naturaldate(user.joined_at)} [`{days2.days} Days.`]**\n:white_small_square: **Status:** **`{user.status}`**\n:white_small_square: **Top Role:** **`{user.top_role.name}`**\n:white_small_square: **Roles:** {','.join([role.name for role in user.roles])}\n:white_small_square: **Playing:** **`{game}`**\n:white_small_square: **Is bot:** **`{user.bot if user.bot else 'False'}`**\n:white_small_square: **ID:** **`{user.id}`**\n:white_small_square: **Created at:** **{humanize.naturaldate(user.created_at)} [`{days.days} Days.`]**"
             embed.set_thumbnail(url=user.avatar_url)
             embed.set_footer(text=f"{self.bot.user.name} - Page 1/3")
             embed.timestamp = datetime.utcnow()
@@ -163,13 +164,13 @@ class Random(commands.Cog):
             game = user.activity
 
             perms = '\n'.join(perm for perm, value in user.guild_permissions if value)
-            days = datetime.utcnow() - user.created_at
+            days = datetime.utcnow() - humanize.naturaldate(user.created_at)
 
-            days2 = datetime.utcnow() - user.joined_at
+            days2 = datetime.utcnow() - humanize.naturaldate(user.joined_at)
 
             embed = discord.Embed(color=user.color.value)
             embed.title = f"`- - {user} - -`"
-            embed.description = f":white_small_square: **Joined at:** **{user.joined_at.strftime('%a %b %d %Y at %I:%M %p')} [`{days2.days} Days.`]**\n:white_small_square: **Status:** **`{user.status}`**\n:white_small_square: **Top Role:** **`{user.top_role.name}`**\n:white_small_square: **Roles:** {','.join([role.name for role in user.roles])}\n:white_small_square: **Playing:** **`{game}`**\n:white_small_square: **Is bot:** **`{user.bot if user.bot else 'False'}`**\n:white_small_square: **ID:** **`{user.id}`**\n:white_small_square: **Created at:** **{user.created_at.strftime('%a %b %d %Y at %I:%M %p')} [`{days.days} Days.`]**"
+            embed.description = f":white_small_square: **Joined at:** **{humanize.naturaldate(user.joined_at)} [`{days2.days} Days.`]**\n:white_small_square: **Status:** **`{user.status}`**\n:white_small_square: **Top Role:** **`{user.top_role.name}`**\n:white_small_square: **Roles:** {','.join([role.name for role in user.roles])}\n:white_small_square: **Playing:** **`{game}`**\n:white_small_square: **Is bot:** **`{user.bot if user.bot else 'False'}`**\n:white_small_square: **ID:** **`{user.id}`**\n:white_small_square: **Created at:** **{humanize.naturaldate(user.created_at)} [`{days.days} Days.`]**"
             embed.set_thumbnail(url=user.avatar_url)
             embed.set_footer(text=f"{self.bot.user.name} - Page 1/2")
             embed.timestamp = datetime.utcnow()
