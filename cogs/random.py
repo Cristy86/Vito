@@ -129,10 +129,10 @@ class Random(commands.Cog):
                 small_image_text_game = "None"
             else:
                 game = game
-                large_image_game = game.large_image_url
-                small_image_game = game.small_image_url
-                large_image_text_game = game.large_image_text
-                small_image_text_game = game.small_image_text
+                largegame = user.activity.large_image_url
+                smallgame = user.activity.small_image_url
+                largetextgame = user.activity.large_image_text
+                smallimagetextgame = user.activity.small_image_text
 
             perms = '\n'.join(perm for perm, value in user.guild_permissions if value)
             days = datetime.utcnow() - user.created_at
@@ -153,10 +153,10 @@ class Random(commands.Cog):
 
             embed3 = discord.Embed(color=user.color.value)
             embed3.title = f"`- - {user}'s game image - -`"
-            embed3.description = f"`Using {small_image_text_game}`\n`{large_image_text_game}`"
-            embed3.set_image(url=large_image_game)
+            embed3.description = f"`Using {smallimagetextgame}`\n`{largetextgame}`"
+            embed3.set_image(url=largegame)
             embed3.set_footer(text=f"{self.bot.user.name} - Page 3/3")
-            embed3.set_thumbnail(url=small_image_game)
+            embed3.set_thumbnail(url=smallgame)
 
             await Paginator(extra_pages=[embed, embed2, embed3])._paginate(ctx)
         except:
