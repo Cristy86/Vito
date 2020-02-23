@@ -157,7 +157,7 @@ class Random(commands.Cog):
             embed3.set_footer(text=f"{self.bot.user.name} - Page 3/3")
             embed3.set_thumbnail(url=small_image_game)
 
-            await Paginator(extras=[embed, embed2, embed3]).paginate(ctx)
+            await Paginator(entries=[embed, embed2, embed3]).paginate(ctx)
         except:
             user = user or ctx.author
             game = user.activity
@@ -179,7 +179,7 @@ class Random(commands.Cog):
             embed2.description = f"`{perms}`"
             embed2.set_footer(text=f"{self.bot.user.name} - Page 2/2")
 
-            await Paginator(extras=[embed, embed2]).paginate(ctx)
+            await Paginator(entries=[embed, embed2]).paginate(ctx)
                                
 def setup(bot):
     bot.add_cog(Random(bot))
