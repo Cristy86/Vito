@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from utils.paginator import HelpPaginator, CannotPaginate, SimplePaginator
+from utils.paginator import CannotPaginate, SimplePaginator
 
 import asyncio
 import os
