@@ -4,4 +4,4 @@ websockets
 praw
 psutil
 -e git+https://github.com/Gorialis/jishaku@master#egg=jishaku
--e git+https://github.com/PythonistaGuild/buttons
+-e git+https://github.com/PythonistaGuild/buttons#egg=buttons
