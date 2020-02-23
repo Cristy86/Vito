@@ -17,7 +17,7 @@ import random
 
 from datetime import datetime
 import psutil
-from utils.constants import OTHER_ERROR_EMOJI, OTHER_SUCCESS_EMOJI 
+from utils.settings import OTHER_ERROR_EMOJI, OTHER_SUCCESS_EMOJI 
 
 class Moderation(commands.Cog):
     """Mod-only commands for the bot."""
