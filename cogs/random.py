@@ -16,7 +16,7 @@ class Random(commands.Cog):
                         client_secret=os.getenv('REDDIT_CLIENT_SECRET'),                        
                         user_agent=os.getenv('REDDIT_USER_AGENT'))
         
-     def meme(self):
+    def meme(self):
          memes_submissions = self.reddit.subreddit('memes').hot()
          post_to_pick = random.randint(1, 100)
          for i in range(0, post_to_pick):
