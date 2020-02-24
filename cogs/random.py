@@ -120,7 +120,7 @@ class Random(commands.Cog):
         try:
             user = user or ctx.author
             game = user.activity or None
-            customstatus = f"{user.CustomActivity.emoji} {user.CustomActivity.name}"
+            customstatus = user.activity.state
 
             if game is None:
                 game = game
