@@ -188,14 +188,18 @@ class Random(commands.Cog):
     @commands.guild_only()
     async def feedback(self, ctx, *, text: str):
         """A command that sends feedback."""
-        embed = discord.Embed(color=GREEN_EMBED)
-        embed.title = "Feedback"
-        embed.description = f"A user named `{ctx.author.name}` sent a feedback that says:\n\n{text}"
-        embed.set_footer(text=self.bot.user.name)
+        embed = discord.Embed(color=0x80ff80)
+        embed.title = "Suggestion"
+        test = self.bot.user.name
+        embed.description = f"{ctx.author.name} sent a suggestion, the description will be below."
+        embed.add_field(name="Description", value=f"{text}", inline=False)
+        embed.set_footer(text=f"This is currently not public, those are tests to see if the command works. | {test}")
         embed.set_thumbnail(url=ctx.author.avatar_url)
         embed.timestamp = datetime.utcnow()
-        await self.bot.get_channel(697860969803546635).send(embed=embed)
-        await ctx.send(f"Thank you for your feedback, {ctx.author.name}. :ok_hand:")
+        msg = await self.bot.get_channel(697860969803546635).send(embed=embed)
+        await msg.add_reaction('\N{THUMBS UP SIGN}')
+        await msg.add_reaction('\N{THUMBS DOWN SIGN}')
+        await ctx.send(f"Thank you for your suggestion, {ctx.author.name}.")
                                
 def setup(bot):
     bot.add_cog(Random(bot))
