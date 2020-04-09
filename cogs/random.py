@@ -184,7 +184,7 @@ class Random(commands.Cog):
     
     @commands.has_permissions(ban_members=True)                              
     @commands.command()
-    @commands.cooldown(1,60,BucketType.guild)
+    @commands.cooldown(1,7200,BucketType.guild)
     @commands.guild_only()
     async def feedback(self, ctx, *, text: str):
         """A command that sends feedback."""
@@ -202,7 +202,7 @@ class Random(commands.Cog):
         await msg.add_reaction('\N{THUMBS DOWN SIGN}')
         response = discord.Embed(color=0x80ff80)
         response.title = "Thank you!"
-        response.description = "We honestly appreciate suggestions for the server to get better, now just wait and for the administration team and the public team to vote for your suggestion!"
+        response.description = "We honestly appreciate suggestions for the server to get better, now just wait and for the administration team and the public to vote for your suggestion!"
         response.set_footer(text=test)                           
         await ctx.send(embed=response)
                                
