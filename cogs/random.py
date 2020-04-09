@@ -181,6 +181,21 @@ class Random(commands.Cog):
             embed2.set_footer(text=f"{self.bot.user.name} - Page 2/2")
 
             await Paginator(extra_pages=[embed, embed2])._paginate(ctx)
+    
+    @commands.has_permissions(ban_members=True)                              
+    @commands.command()
+    @commands.cooldown(1,60,BucketType.guild)
+    @commands.guild_only()
+    async def feedback(self, ctx, *, text: str):
+        """A command that sends feedback."""
+        embed = discord.Embed(color=GREEN_EMBED)
+        embed.title = "Feedback"
+        embed.description = f"A user named `{ctx.author.name}` sent a feedback that says:\n\n{text}"
+        embed.set_footer(text=self.bot.user.name)
+        embed.set_thumbnail(url=ctx.author.avatar_url)
+        embed.timestamp = datetime.utcnow()
+        await self.bot.get_channel(697860969803546635).send(embed=embed)
+        await ctx.send(f"Thank you for your feedback, {ctx.author.name}. :ok_hand:")
                                
 def setup(bot):
     bot.add_cog(Random(bot))
