@@ -44,7 +44,7 @@ class CommandErrorHandler(commands.Cog):
             return await ctx.send(f'{error}.')
         
         elif isinstance(error, commands.CommandOnCooldown):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'{error}.\n\n`STOP!`\nHold it right there. You might be confused. ***How much do I need to wait?***\nYes, it can be confusing but Vito will send you some sites to calculate the time the bot gave because of the cooldown! Goodluck!\nhttps://www.checkyourmath.com/convert/time/seconds_minutes.php\nhttps://www.checkyourmath.com/convert/time/seconds_hours.php')
         
         elif isinstance(error, commands.NotOwner):
             return await ctx.send(f'{error}.')
