@@ -26,7 +26,7 @@ class CommandErrorHandler(commands.Cog):
             return
 
         elif isinstance(error, commands.DisabledCommand):
-            return await ctx.send(f'{ctx.command} has been disabled.')
+            return await ctx.send(f'`{ctx.command}` has been disabled.')
 
         elif isinstance(error, commands.BadArgument):
             return await ctx.send(f'{error}.')
