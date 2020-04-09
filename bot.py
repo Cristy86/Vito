@@ -10,7 +10,7 @@ from discord.ext.commands.cooldowns import BucketType
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')))
 bot.launch_time = datetime.utcnow()
-startup_extensions = ['cogs.owner','cogs.webhook','cogs.random','cogs.eh','jishaku']
+startup_extensions = ['cogs.owner','cogs.webhook','cogs.random','cogs.eh', 'cogs.mod', 'jishaku']
 
 
 @bot.event
