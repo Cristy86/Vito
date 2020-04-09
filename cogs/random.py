@@ -193,13 +193,18 @@ class Random(commands.Cog):
         test = self.bot.user.name
         embed.description = f"{ctx.author.name} sent a suggestion, the description will be below."
         embed.add_field(name="Description", value=f"{text}", inline=False)
-        embed.set_footer(text=f"This is currently not public, those are tests to see if the command works. | {test}")
+        embed.add_field(name="Notice", value="Please remember that this is not public and yet those are tests into seing if they work.", inline=True)         
+        embed.set_footer(text=f"{test} | Version, 1.0.0")
         embed.set_thumbnail(url=ctx.author.avatar_url)
         embed.timestamp = datetime.utcnow()
         msg = await self.bot.get_channel(697860969803546635).send(embed=embed)
         await msg.add_reaction('\N{THUMBS UP SIGN}')
         await msg.add_reaction('\N{THUMBS DOWN SIGN}')
-        await ctx.send(f"Thank you for your suggestion, {ctx.author.name}.")
+        response = discord.Embed(color=0x80ff80)
+        response.title = "Thank you!"
+        response.description = "We honestly appreciate suggestions for the server to get better, now just wait and for the administration team and the public team to vote for your suggestion!"
+        response.set_footer(text=test)                           
+        await ctx.send(embed=response)
                                
 def setup(bot):
     bot.add_cog(Random(bot))
