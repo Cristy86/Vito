@@ -191,10 +191,10 @@ class Random(commands.Cog):
         embed = discord.Embed(color=0x80ff80)
         embed.title = "Suggestion"
         test = self.bot.user.name
-        embed.description = f"{ctx.author.name} sent a suggestion, the description will be below."
+        embed.description = f"`{ctx.author}` sent a suggestion, the description will be below."
         embed.add_field(name="Description", value=f"{text}", inline=False)
         embed.add_field(name="Notice", value="Please remember that this is not public and yet those are tests into seing if they work.", inline=True)         
-        embed.set_footer(text=f"{test} | Version, 1.0.0")
+        embed.set_footer(text=f"{test}")
         embed.set_thumbnail(url=ctx.author.avatar_url)
         embed.timestamp = datetime.utcnow()
         msg = await self.bot.get_channel(697860969803546635).send(embed=embed)
