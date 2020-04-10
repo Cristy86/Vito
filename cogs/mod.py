@@ -289,7 +289,7 @@ class Moderation(commands.Cog):
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
             embed.description = f"Looks like you got unmuted.. \N{FACE WITHOUT MOUTH}"
-            embed.add_field(name="`Moderator`", value=ctx.author")
+            embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
             embed.add_field(name="`Guild`", value=ctx.guild)
             await user.send(embed=embed)
