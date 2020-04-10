@@ -99,7 +99,7 @@ class Moderation(commands.Cog):
         if ctx.me.top_role <= user.top_role:
             return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't softban `{user}`.")
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't softban `{user}`."))
+            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't softban `{user}`.")
         if reason is None:
             reason = 'No reason.'
         
@@ -189,7 +189,7 @@ class Moderation(commands.Cog):
         if ctx.me.top_role <= user.top_role:
             return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't warn `{user}`.")
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't warn `{user}`."))
+            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't warn `{user}`.")
         if reason is None:
             reason = 'No reason.'
         if logChannel is None:
@@ -239,7 +239,7 @@ class Moderation(commands.Cog):
         if ctx.me.top_role <= user.top_role:
             return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't mute `{user}`.")
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't mute `{user}`."))
+            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't mute `{user}`.")
         if reason is None:
             reason = 'No reason.'
         await ctx.channel.set_permissions(user,         read_messages=True,
@@ -274,7 +274,7 @@ class Moderation(commands.Cog):
         if ctx.me.top_role <= user.top_role:
             return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't unmute `{user}`.")
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't unmute `{user}`."))
+            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't unmute `{user}`.")
         if reason is None:
             reason = 'No reason.'
         await ctx.channel.set_permissions(user,         read_messages=True,
