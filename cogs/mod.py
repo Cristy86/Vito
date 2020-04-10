@@ -168,8 +168,10 @@ class Moderation(commands.Cog):
             return
         
         embed = discord.Embed(color=GREEN_EMBED)
-        embed.description = f"{text}"
-        embed.set_footer(text=f"{ctx.author}", icon_url=ctx.author.avatar_url)
+        embed.title = "Public poll"
+        embed.description = f"The member from the administration team {ctx.author} has made a public poll to see if you like it or not!\n\n{text}"
+        embed.set_thumbnail(url=ctx.author.avatar_url)
+        embed.set_footer(text=self.bot.user.name)
         embed.timestamp = datetime.utcnow()
         msg = await ctx.send(embed=embed)
         await msg.add_reaction('\N{THUMBS UP SIGN}')
@@ -202,7 +204,8 @@ class Moderation(commands.Cog):
         embed.title = "Alert System"
         embed.description = f"{ctx.author} warned {user}."
         embed.add_field(name="`Moderator`", value=ctx.author)
-        embed.add_field(name="`Reason`", value=reason)
+        embed.add_field(name="`Reason`", value=reason, inline=True)
+        embed.set_thumbnail(url=ctx.author.avatar_url)
         await logChannel.send(embed=embed)
 
         await ctx.send(f'<{SUCCESS_EMOJI}> Done. Warned him!')
@@ -213,6 +216,7 @@ class Moderation(commands.Cog):
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
             embed.add_field(name="`Guild`", value=ctx.guild)
+            embed.set_thumbnail(url=ctx.author.avatar_url)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
@@ -256,6 +260,7 @@ class Moderation(commands.Cog):
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
             embed.add_field(name="`Guild`", value=ctx.guild)
+            embed.set_thumbnail(url=ctx.author.avatar_url)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
@@ -292,6 +297,7 @@ class Moderation(commands.Cog):
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
             embed.add_field(name="`Guild`", value=ctx.guild)
+            embed.set_thumbnail(url=ctx.author.avatar_url)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
