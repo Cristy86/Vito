@@ -73,9 +73,10 @@ class Moderation(commands.Cog):
         try:
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
-            embed.description = f"Looks like you got kicked from {ctx.guild.name}. :boot:"
+            embed.description = f"Looks like you got kicked. :boot:"
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
+            embed.add_field(name="`Guild`", value=ctx.guild)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
@@ -109,9 +110,10 @@ class Moderation(commands.Cog):
         try:
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
-            embed.description = f"Looks like you got softbanned from {ctx.guild.name}. <a:BlobBan:466662201835388949>"
+            embed.description = f"Looks like you got softbanned. <a:BlobBan:466662201835388949>"
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
+            embed.add_field(name="`Guild`", value=ctx.guild)
             embed.add_field(name="What does softban means?", value="If you don't know, softban means that bans an user and then unbans the user.", inline=True)
             await user.send(embed=embed)
         except discord.Forbidden as e:
@@ -145,9 +147,10 @@ class Moderation(commands.Cog):
         try:
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
-            embed.description = f"Looks like you got banned from {ctx.guild.name}. <a:BlobBan:466662201835388949>"
+            embed.description = f"Looks like you got banned. <a:BlobBan:466662201835388949>"
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
+            embed.add_field(name="`Guild`", value=ctx.guild)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
@@ -197,18 +200,19 @@ class Moderation(commands.Cog):
         
         embed = discord.Embed(color=GREEN_EMBED)
         embed.title = "Alert System"
-        embed.description = f"{user} warned you. \N{DOUBLE EXCLAMATION MARK}"
+        embed.description = f"{ctx.author} warned {user}."
         embed.add_field(name="`Moderator`", value=ctx.author)
         embed.add_field(name="`Reason`", value=reason)
         await logChannel.send(embed=embed)
 
-        await ctx.send(f'<{SUCCESS_EMOJI}> **Done.**')
+        await ctx.send(f'<{SUCCESS_EMOJI}> Done. Warned him!')
         try:
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
-            embed.description = f"Looks like you got warned from {ctx.guild.name}. \N{DOUBLE EXCLAMATION MARK}"
+            embed.description = f"Looks like you got warned. \N{DOUBLE EXCLAMATION MARK}"
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
+            embed.add_field(name="`Guild`", value=ctx.guild)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
@@ -248,9 +252,10 @@ class Moderation(commands.Cog):
         try:
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
-            embed.description = f"Looks like you got muted from {ctx.guild.name}.. \N{FACE WITHOUT MOUTH}"
+            embed.description = f"Looks like you got muted.. \N{FACE WITHOUT MOUTH}"
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
+            embed.add_field(name="`Guild`", value=ctx.guild)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
@@ -283,9 +288,10 @@ class Moderation(commands.Cog):
         try:
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
-            embed.description = f"Looks like you got unmuted from {ctx.guild.name}.. \N{FACE WITHOUT MOUTH}"
+            embed.description = f"Looks like you got unmuted.. \N{FACE WITHOUT MOUTH}"
             embed.add_field(name="`Moderator`", value=ctx.author")
             embed.add_field(name="`Reason`", value=reason)
+            embed.add_field(name="`Guild`", value=ctx.guild)
             await user.send(embed=embed)
         except discord.Forbidden as e:
             error = await ctx.send(f"<{ERROR_EMOJI}> Looks like the user blocked me. DM message failed. Deleting this message in 5 seconds.\n```py\n{type(e).__name__}: {e}\n```")
