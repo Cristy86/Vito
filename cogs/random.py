@@ -186,14 +186,14 @@ class Random(commands.Cog):
     @commands.command()
     @commands.cooldown(1,7200,BucketType.guild)
     @commands.guild_only()
-    async def feedback(self, ctx, *, text: str):
-        """A command that sends feedback."""
+    async def suggest(self, ctx, *, text: str):
+        """A command that sends a suggestion to our server!"""
         embed = discord.Embed(color=0x80ff80)
         embed.title = "Suggestion"
         test = self.bot.user.name
         embed.description = f"`{ctx.author}` sent a suggestion, the description will be below."
         embed.add_field(name="Description", value=f"{text}", inline=False)
-        embed.add_field(name="Notice", value="Please remember that this is not public and yet those are tests into seing if they work.", inline=True)         
+        embed.add_field(name="Notice", value="You cannot vote your suggestion, if so doing that will result removing the reaction.", inline=True)         
         embed.set_footer(text=f"{test}")
         embed.set_thumbnail(url=ctx.author.avatar_url)
         embed.timestamp = datetime.utcnow()
