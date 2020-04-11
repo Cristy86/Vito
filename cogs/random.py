@@ -222,7 +222,8 @@ class Random(commands.Cog):
         content = text
         webhook = await channel.create_webhook(name=f"{user.name}#{user.discriminator}")
         
-        await ctx.message.remove_reaction("☑️", member=ctx.author)
+        await ctx.message.remove_reaction("⏰", member=ctx.author)
+        await ctx.message.add_reaction("☑️")
         await webhook.send(content, avatar_url=user.avatar_url_as(format='png'))
         await webhook.delete()
                                
