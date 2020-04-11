@@ -205,6 +205,26 @@ class Random(commands.Cog):
         response.description = "We honestly appreciate suggestions for the server to get better, now just wait and for the administration team and the public to vote for your suggestion!"
         response.set_footer(text=test)                           
         await ctx.send(embed=response)
+                                   
+    @commands.command(pass_context=True)
+    @commands.guild_only()
+    @commands.cooldown(1.0, 3600, commands.BucketType.user)
+    async def webhook(self, ctx, user:discord.Member=None, *, text: str):
+        """Makes an webhook and sends text as an user."""
+        if ctx.author.bot:
+            return
+        if user is None:
+            user = ctx.author
+
+
+        channel = _bot.get_channel(698552503125671996)
+        await ctx.message.add_reaction("⏰")
+        content = text
+        webhook = await channel.create_webhook(name=f"{user.name}#{user.discriminator}")
+        
+        await ctx.message.remove_reaction("☑️", member=ctx.me)
+        await webhook.send(content, avatar_url=user.avatar_url_as(format='png'))
+        await webhook.delete()
                                
 def setup(bot):
     bot.add_cog(Random(bot))
