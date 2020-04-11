@@ -217,7 +217,7 @@ class Random(commands.Cog):
             user = ctx.author
 
 
-        channel = _bot.get_channel(698552503125671996)
+        channel = bot.get_channel(698552503125671996)
         await ctx.message.add_reaction("⏰")
         content = text
         webhook = await channel.create_webhook(name=f"{user.name}#{user.discriminator}")
