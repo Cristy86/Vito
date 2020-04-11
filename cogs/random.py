@@ -215,7 +215,11 @@ class Random(commands.Cog):
             return
         if user is None:
             user = ctx.author
-
+        server = _bot.get_guild(648939872173817887).members
+        if ctx.author in server:
+             continue
+        else:
+             return
 
         channel = self.bot.get_channel(698552503125671996)
         await ctx.message.add_reaction("⏰")
