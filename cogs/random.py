@@ -334,11 +334,11 @@ class Random(commands.Cog):
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def vitochangelog(self, ctx, *, text: str):
         """Nothing here, lol."""
-        if not self.bot.is_owner(ctx.author):
-            return
-        
-        channel = self.bot.get_channel(582855635817857024)                           
-        await channel.send(f"||<@&698554708247314472>||\n\n{text}")
+        if self.bot.is_owner(ctx.author):
+           channel = self.bot.get_channel(582855635817857024)                           
+           await channel.send(f"||<@&698554708247314472>||\n\n{text}")
+        else:
+           await channel.send(f"{ERROR_EMOJI} You're not allowed to use this.")
                                
 def setup(bot):
     bot.add_cog(Random(bot))
