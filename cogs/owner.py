@@ -249,6 +249,13 @@ class Owner(commands.Cog):
         """Sets streaming status in silent."""
         await self.bot.change_presence(activity=discord.Streaming(name=activity, url=url))
         await ctx.message.add_reaction(SUCCESS_EMOJI)
+        
+    @commands.command()
+    @commands.guild_only()
+    async def vitochangelog(self, ctx, *, text):
+        """Nothing here, lol."""
+       channel = self.bot.get_channel(582855635817857024)                           
+       await channel.send(f"||<@&698554708247314472>||\n\n{text}")
 
 def setup(bot):
     bot.add_cog(Owner(bot))
