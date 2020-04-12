@@ -328,18 +328,6 @@ class Random(commands.Cog):
         
         results = ["It is certain"," It is decidedly so","Without a doubt","Yes, definitely","You may rely on it","As I see it, yes"," Most likely","Outlook good","Yes","Signs point to yes"," Reply hazy try again","Ask again later","Better not tell you now","Cannot predict now","Concentrate and ask again","Don't count on it","My reply is no","My sources say no","Outlook not so good","Very doubtful"]
         await ctx.send(f"The 🎱 says:\n{random.choice(results)}.")
-
-    @commands.command(hidden=True)
-    @commands.guild_only()
-    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
-    async def vitochangelog(self, ctx, *, text: str):
-        """Nothing here, lol."""
-        owner = self.bot.get_user(339752841612623872)
-        if ctx.author.id is owner.id:
-           channel = self.bot.get_channel(582855635817857024)                           
-           await channel.send(f"||<@&698554708247314472>||\n\n{text}")
-        else:
-           await ctx.send(f"{ERROR_EMOJI} You're not allowed to use this.")
                                
 def setup(bot):
     bot.add_cog(Random(bot))
