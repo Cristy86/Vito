@@ -217,19 +217,18 @@ class Random(commands.Cog):
             user = ctx.author
         server = _bot.get_guild(648939872173817887).members
         if ctx.author in server:
-             continue
-        else:
-             return
+             
 
-        channel = self.bot.get_channel(698552503125671996)
-        await ctx.message.add_reaction("⏰")
-        content = text
-        webhook = await channel.create_webhook(name=f"{user.name}#{user.discriminator}")
-        
-        await ctx.message.remove_reaction("⏰", member=ctx.author)
-        await ctx.message.add_reaction("☑️")
-        await webhook.send(content, avatar_url=user.avatar_url_as(format='png'))
-        await webhook.delete()
+           channel = self.bot.get_channel(698552503125671996)
+           await ctx.message.add_reaction("⏰")
+           content = text
+           webhook = await channel.create_webhook(name=f"{user.name}#{user.discriminator}")
+           await ctx.message.remove_reaction("⏰", member=ctx.author)
+           await ctx.message.add_reaction("☑️")
+           await webhook.send(content, avatar_url=user.avatar_url_as(format='png'))
+           await webhook.delete()
+        else:
+           await ctx.message.add_reaction("❌")
                                
 def setup(bot):
     bot.add_cog(Random(bot))
