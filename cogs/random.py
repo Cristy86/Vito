@@ -335,7 +335,7 @@ class Random(commands.Cog):
     async def vitochangelog(self, ctx, *, text: str):
         """Nothing here, lol."""
         owner = self.bot.get_user(339752841612623872)
-        if owner.id is True then:
+        if ctx.author.id = owner.id:
            channel = self.bot.get_channel(582855635817857024)                           
            await channel.send(f"||<@&698554708247314472>||\n\n{text}")
         else:
