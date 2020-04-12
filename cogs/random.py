@@ -215,7 +215,7 @@ class Random(commands.Cog):
             return
         if user is None:
             user = ctx.author
-        server = self.bot.get_guild(648939872173817887).members
+        server = self.bot.get_guild(665668439871979520).members
         if ctx.author in server:
              
 
