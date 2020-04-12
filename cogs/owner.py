@@ -255,7 +255,8 @@ class Owner(commands.Cog):
     async def changelog(self, ctx, *, text: str):
         """Nothing here, lol."""
         test = self.cleanup_code(text)                       
-        await ctx.send(test)
+        channel = self.bot.get_channel(698555983273918464)
+        await channel.send(test)
     
     @commands.command(rest_is_raw=True, aliases=['say'])
     @commands.guild_only()
