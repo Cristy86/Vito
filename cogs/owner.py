@@ -256,6 +256,11 @@ class Owner(commands.Cog):
         """Nothing here, lol."""
         test = self.cleanup_code(text)                       
         await ctx.send(test)
+    
+    @commands.command(rest_is_raw=True, aliases=['say'])
+    @commands.guild_only()
+    async def echo(self, ctx, *, content):
+        await ctx.send(content)
 
 def setup(bot):
     bot.add_cog(Owner(bot))
