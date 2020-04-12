@@ -229,6 +229,116 @@ class Random(commands.Cog):
            await webhook.delete()
         else:
            await ctx.message.add_reaction("❌")
+                                   
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def dog(self, ctx):
+        """Generates a random image dog."""
+        if ctx.author.bot:
+            return
+        try:
+            async with aiohttp.ClientSession() as cs:
+                async with cs.get('https://random.dog/woof.json') as r:
+                    res = await r.json()
+                    embed = discord.Embed(color=GREEN_EMBED)
+                    embed.title = "D O G ."
+                    embed.set_image(url=res['url'])
+                    embed.set_footer(text=f"{self.bot.user.name}")
+                    embed.timestamp = datetime.utcnow()
+                    await ctx.send(embed=embed)
+        except Exception as e:
+            await ctx.send(f"<{ERROR_EMOJI}> The API might be unavailable now.\n\n```py\n{type(e).__name__}: {str(e)}\n```")
+
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def cat(self, ctx):
+        """Generates a random image cat."""
+        if ctx.author.bot:
+            return
+        try:
+            async with aiohttp.ClientSession() as cs:
+                async with cs.get('http://aws.random.cat/meow') as r:
+                    res = await r.json()
+                    embed = discord.Embed(color=GREEN_EMBED)
+                    embed.title = "C A T ."
+                    embed.set_image(url=res['file'])
+                    embed.set_footer(text=f"{self.bot.user.name}")
+                    embed.timestamp = datetime.utcnow()
+                    await ctx.send(embed=embed)
+        except Exception as e:
+            await ctx.send(f"<{ERROR_EMOJI}> The API might be unavailable now.\n\n```py\n{type(e).__name__}: {str(e)}\n```")
+
+
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def fox(self, ctx):
+        """Generates a random image fox."""
+        if ctx.author.bot:
+            return
+        try:
+            async with aiohttp.ClientSession() as cs:
+                async with cs.get('https://randomfox.ca/floof/') as r:
+                    res = await r.json()
+                    embed = discord.Embed(color=GREEN_EMBED)
+                    embed.title = "F O X ."
+                    embed.set_image(url=res['image'])
+                    embed.set_footer(text=f"{self.bot.user.name}")
+                    embed.timestamp = datetime.utcnow()
+                    await ctx.send(embed=embed)
+        except Exception as e:
+            await ctx.send(f"<{ERROR_EMOJI}> The API might be unavailable now.\n\n```py\n{type(e).__name__}: {str(e)}\n```")
+                                   
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def hownonce(self, ctx, user: discord.Member):
+        """How % nonce he is?"""
+        if ctx.author.bot:
+            return
+        if user is None:
+            user = ctx.author
+            random.seed(user.id)
+            percent = random.randint(0, 100)
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.title = "How % nonce are you?"
+            embed.description = f"You are {percent}% nonce."
+            embed.set_footer(text=f"{self.bot.user.name}")
+            embed.timestamp = datetime.utcnow()
+            await ctx.send(embed=embed)
+        else:
+            random.seed(user.id)
+            percent = random.randint(0, 100)
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.title = f"How % nonce is {user.mention}?"
+            embed.description = f"{user.mention} is {percent}% nonce."
+            embed.set_footer(text=f"{self.bot.user.name}")
+            embed.timestamp = datetime.utcnow()
+            await ctx.send(embed=embed)
+    
+    @commands.command(name="8ball")
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def _ball(self, ctx, *, question:str):
+        """8ball, what did you expect?"""
+        if ctx.author.bot:
+            return
+        
+        results = ["It is certain"," It is decidedly so","Without a doubt","Yes, definitely","You may rely on it","As I see it, yes"," Most likely","Outlook good","Yes","Signs point to yes"," Reply hazy try again","Ask again later","Better not tell you now","Cannot predict now","Concentrate and ask again","Don't count on it","My reply is no","My sources say no","Outlook not so good","Very doubtful"]
+        await ctx.send(f"The 🎱 says:\n{random.choice(results)}.")
+
+    @commands.command(hidden=True)
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def vitochangelog(self, ctx, *, text: str):
+        """Nothing here, lol."""
+        if not self.bot.is_owner(ctx.author):
+            return
+        
+        channel = self.bot.get_channel(582855635817857024)                           
+        await channel.send(f"||<@&698554708247314472>||\n\n{text}")
                                
 def setup(bot):
     bot.add_cog(Random(bot))
