@@ -252,10 +252,11 @@ class Owner(commands.Cog):
         
     @commands.command()
     @commands.guild_only()
-    async def vitochangelog(self, ctx, *, text):
+    async def vitochangelog(self, ctx, *, text: str):
         """Nothing here, lol."""
+        test = self.cleanup_code(text)
         channel = self.bot.get_channel(582855635817857024)                           
-        await channel.send(f"||<@&698554708247314472>||\n\n{text}")
+        await channel.send(f"||<@&698554708247314472>||\n\n{test}")
 
 def setup(bot):
     bot.add_cog(Owner(bot))
