@@ -250,7 +250,7 @@ class Owner(commands.Cog):
         await self.bot.change_presence(activity=discord.Streaming(name=activity, url=url))
         await ctx.message.add_reaction(SUCCESS_EMOJI)
         
-    @commands.command()
+    @commands.command(pass_context=True)
     @commands.guild_only()
     async def vitochangelog(self, ctx, *, text: str):
         """Nothing here, lol."""
