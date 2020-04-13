@@ -26,34 +26,34 @@ class CommandErrorHandler(commands.Cog):
             return
 
         elif isinstance(error, commands.DisabledCommand):
-            return await ctx.send(f'`{ctx.command}` has been disabled.')
+            return await ctx.send(f'<{ERROR_EMOJI}> `{ctx.command}` has been disabled.\n\n`{error}`')
 
         elif isinstance(error, commands.BadArgument):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'There was a error that is unexpected, please report this to the owner. (c_ristian#0126)\n\n{error}.')
 
         elif isinstance(error, commands.CheckFailure):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'<{ERROR_EMOJI}> A check has failed for some reason.\n\n`{error}`.')
 
         elif isinstance(error, commands.CommandInvokeError):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'There was a error that is unexpected, please report this to the owner. (c_ristian#0126)\n\n{error}.')
 
         elif isinstance(error, commands.TooManyArguments):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'There was a error that is unexpected, please report this to the owner. (c_ristian#0126)\n\n{error}.')
         
         elif isinstance(error, commands.UserInputError):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'There was a error that is unexpected, please report this to the owner. (c_ristian#0126)\n\n{error}.')
         
         elif isinstance(error, commands.CommandOnCooldown):
-            return await ctx.send(f'{error}.\n\n`STOP!`\nHold it right there. You might be confused. ***How much do I need to wait?***\nYes, it can be confusing but Vito will send you some sites to calculate the time the bot gave because of the cooldown! Goodluck!\nhttps://www.checkyourmath.com/convert/time/seconds_minutes.php\nhttps://www.checkyourmath.com/convert/time/seconds_hours.php')
+            return await ctx.send(f'{error}.\n\n`STOP!`\nHold it right there. You might be confused. ***7200 seconds?? What does that mean??***\nYes, it can be confusing but Vito will send you some sites to calculate the time the bot gave because of the cooldown! Goodluck!\nhttps://www.checkyourmath.com/convert/time/seconds_minutes.php\nhttps://www.checkyourmath.com/convert/time/seconds_hours.php')
         
         elif isinstance(error, commands.NotOwner):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'<{ERROR_EMOJI}> You are not the owner of this bot. \n\n`{error}`.')
         
         elif isinstance(error, commands.MissingPermissions):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'<{ERROR_EMOJI}> I am missing some permissions. \n\n`{error}`.')
         
         elif isinstance(error, commands.BotMissingPermissions):
-            return await ctx.send(f'{error}.')
+            return await ctx.send(f'<{ERROR_EMOJI}> The bot is missing some permissions. \n\n`{error}`.')
 
         elif isinstance(error, commands.NoPrivateMessage):
             try:
