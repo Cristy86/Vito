@@ -349,7 +349,7 @@ class Random(commands.Cog):
     @commands.command(pass_context=True)
     @commands.guild_only()
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
-    async def ichoose(self, ctx, *, choiceone, choicetwo, choicethree):
+    async def ichoose(self, ctx, choiceone, choicetwo, choicethree):
         """Say three things and I'll choose!"""
         if ctx.author.bot:
             return                                   
