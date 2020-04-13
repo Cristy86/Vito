@@ -353,13 +353,7 @@ class Random(commands.Cog):
         """Say three things and I'll choose!"""
         if ctx.author.bot:
             return                                   
-        choices = [choiceone, choicetwo, choicethree]
-        if choiceone or choicetwo is None in choices:
-              await ctx.send(f"<{ERROR_EMOJI}> You cannot let me choose nothing..")
-              return
-        if choicethree is None in choices:
-              await ctx.send(f"<{ERROR_EMOJI}> You must say at least another thing I cannot let it null.")
-              return                            
+        choices = [choiceone, choicetwo, choicethree]                          
         
         await ctx.send(f"I choose.. {random.choice(choices)}")
                                
