@@ -294,8 +294,8 @@ class Random(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
-    async def hownonce(self, ctx, user: discord.Member):
-        """How % nonce he is?"""
+    async def hownonce(self, ctx, user: discord.Member = None):
+        """How much of an nonce he is?"""
         if ctx.author.bot:
             return
         if user is None:
@@ -303,7 +303,7 @@ class Random(commands.Cog):
             random.seed(user.id)
             percent = random.randint(0, 100)
             embed = discord.Embed(color=GREEN_EMBED)
-            embed.title = "How % nonce are you?"
+            embed.title = "How much of a nonce are you?"
             embed.description = f"You are {percent}% nonce."
             embed.set_footer(text=f"{self.bot.user.name}")
             embed.timestamp = datetime.utcnow()
@@ -312,7 +312,7 @@ class Random(commands.Cog):
             random.seed(user.id)
             percent = random.randint(0, 100)
             embed = discord.Embed(color=GREEN_EMBED)
-            embed.title = f"How % nonce is {user.mention}?"
+            embed.title = f"How much of an nonce is {user.name}?"
             embed.description = f"{user.mention} is {percent}% nonce."
             embed.set_footer(text=f"{self.bot.user.name}")
             embed.timestamp = datetime.utcnow()
