@@ -328,6 +328,40 @@ class Random(commands.Cog):
         
         results = ["It is certain"," It is decidedly so","Without a doubt","Yes, definitely","You may rely on it","As I see it, yes"," Most likely","Outlook good","Yes","Signs point to yes"," Reply hazy try again","Ask again later","Better not tell you now","Cannot predict now","Concentrate and ask again","Don't count on it","My reply is no","My sources say no","Outlook not so good","Very doubtful"]
         await ctx.send(f"The 🎱 says:\n{random.choice(results)}.")
+
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def rps(self, ctx, *, comment: str):
+        """Rock, paper, scissors!"""
+        if ctx.author.bot:
+            return                                   
+        choices = ["Paper", "Scissors", "Rock"]
+        try:
+            if comment not in choices:
+              await ctx.send(f"<{ERROR_EMOJI}> You must choose:\n`Paper, Rock or Scissors.`")
+              return
+            else:
+                await ctx.send(f"You choosed {comment}! I choosed {random.choice(choices)}! Did I win? I cannot see!")
+        except Exception as e:
+               await ctx.send(F'<{ERROR_EMOJI}> Someone came up, please report this.\n\n{e}')
+                                   
+    @commands.command()
+    @commands.guild_only()
+    @commands.cooldown(1.0, 30.0, commands.BucketType.user)
+    async def choose(self, ctx, choiceone: str = None, choicetwo: str = None, choicethree: str = None):
+        """Say three things and I'll choose!"""
+        if ctx.author.bot:
+            return                                   
+        choices = [choiceone, choicetwo, choicethree]
+        if choiceone or choicetwo is None in choices:
+              await ctx.send(f"<{ERROR_EMOJI}> You cannot let me choose nothing..")
+              return
+        if choicethree is None in choices:
+              await ctx.send(f"<{ERROR_EMOJI}> You must say at least another thing I cannot let it null.")
+              return                            
+        
+        await ctx.send(f"I choose.. {random.choice(choices)}")
                                
 def setup(bot):
     bot.add_cog(Random(bot))
