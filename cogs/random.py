@@ -349,13 +349,13 @@ class Random(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
-    async def choose(self, ctx, choiceone: str, choicetwo: str, choicethree: str):
+    async def choose(self, ctx, choiceone, choicetwo, choicethree):
         """Say three things and I'll choose!"""
         if ctx.author.bot:
             return                                   
         choices = [choiceone, choicetwo, choicethree]                          
         
-        await ctx.send(f"I choose.. {random.choice(choices)}")
+        await ctx.send(random.choice(choices))
                                
 def setup(bot):
     bot.add_cog(Random(bot))
