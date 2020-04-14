@@ -262,6 +262,7 @@ class Owner(commands.Cog):
     @commands.guild_only()
     async def echo(self, ctx, *, content):
         await ctx.send(content)
+        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Owner(bot))
