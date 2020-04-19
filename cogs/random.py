@@ -359,24 +359,11 @@ class Random(commands.Cog):
                                    
     @commands.command(pass_context=True)
     @commands.guild_only()
+    @commands.is_owner()
     @commands.cooldown(1.0, 20.0, commands.BucketType.user)
-    async def finduser(self, ctx, userID: int):
-        """Finds a user with an ID."""
-        if ctx.author.bot:
-            return
-
-        if len(str(userID)) < 17:
-            return await ctx.send(f"<{ERROR_EMOJI}> Incorrect user ID.")
-
-        user = await self.bot.get_user_info(userID)
-        embed = discord.Embed(color=0x000000)
-        embed.title = "Results:"
-        embed.description = f"User: {user}\n\nCreated at: `{user.created_at.strftime('%a %b %m %Y at %I:%M %p %Z')}`"
-        embed.set_thumbnail(url=user.avatar_url)
-        embed.set_footer(text=f"{self.bot.user.name}")
-        embed.timestamp = datetime.utcnow()
-
-        await ctx.send(embed=embed)
+    async def pressf(self, ctx):
+        """F."""
+        await ctx.send("f")
 
                                
 def setup(bot):
