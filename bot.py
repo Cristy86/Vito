@@ -46,7 +46,7 @@ async def _stats(ctx):
     embed.set_footer(text=bot.user.name)
     embed.set_thumbnail(url=bot.user.avatar_url)
     embed.timestamp = datetime.utcnow()
-    await ctx.send(embed=embed) 
+    await ctx.send(embed=embed) ## 1.32.7
                                
                                                         
 if __name__ == "__main__":
