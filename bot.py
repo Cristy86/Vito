@@ -29,7 +29,11 @@ async def _stats(ctx):
     """Shows the stats about the bot."""
     if ctx.author.bot:
         return                                                    
-                                                       
+    t_1 = time.perf_counter()
+        await ctx.trigger_typing() 
+
+    t_2 = time.perf_counter()
+    time_delta = round((t_2-t_1)*1000)                                                    
     delta_uptime = datetime.utcnow() - bot.launch_time
     hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
@@ -38,7 +42,7 @@ async def _stats(ctx):
     embed.title = "Stats"
     embed.add_field(name="Owner", value=f"The bot of this owner is `{bot.get_user(339752841612623872)}`, and this bot sees `{len(bot.users)}` users!", inline=True)
     embed.add_field(name="Usage & Misc", value=f"I am in `{len(bot.guilds)}` servers! And my memory usage is `{psutil.virtual_memory().percent} MB` and my CPU usage is `{psutil.cpu_percent()}%`!", inline=True)
-    embed.add_field(name="Uptime & Ping latency", value=f"I have been up to `{days}d, {hours}h, {minutes}m, {seconds}s` and my ping latency is `{round(bot.latency * 1000)}ms`!", inline=False)
+    embed.add_field(name="Uptime & Ping latency", value=f"I have been up to `{days}d, {hours}h, {minutes}m, {seconds}s` and my websocket latency is `{round(bot.latency * 1000)}ms` and time is `{time_delta}ms.`!", inline=False)
     embed.add_field(name="A little bit of info", value="Hi! My name is Vito and I am a personal bot made by Cristian. And I am at least featured in some servers but I am a personal server bot too! This bot cannot be invited to other servers without the owner's permission! I do not have many commands, I am a bot used for suggestions, polls and a bit of moderation. That's all!", inline=True)
     embed.set_footer(text=bot.user.name)
     embed.set_thumbnail(url=bot.user.avatar_url)
