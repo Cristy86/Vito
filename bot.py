@@ -29,9 +29,8 @@ async def _stats(ctx):
     """Shows the stats about the bot."""
     if ctx.author.bot:
         return                                                    
+    await ctx.trigger_typing()
     t_1 = time.perf_counter()
-        await ctx.trigger_typing() 
-
     t_2 = time.perf_counter()
     time_delta = round((t_2-t_1)*1000)                                                    
     delta_uptime = datetime.utcnow() - bot.launch_time
@@ -47,7 +46,8 @@ async def _stats(ctx):
     embed.set_footer(text=bot.user.name)
     embed.set_thumbnail(url=bot.user.avatar_url)
     embed.timestamp = datetime.utcnow()
-    await ctx.send(embed=embed)                                                       
+    await ctx.send(embed=embed) 
+                               
                                                         
 if __name__ == "__main__":
     for extension in startup_extensions:
