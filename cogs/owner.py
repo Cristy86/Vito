@@ -35,7 +35,7 @@ class Owner(commands.Cog):
 
         # remove `foo`
         return content.strip('` \n')
-
+    
     async def cog_check(self, ctx):
         return await self.bot.is_owner(ctx.author)
 
@@ -49,6 +49,7 @@ class Owner(commands.Cog):
 
     @commands.command(name='load', hidden=False)
     @commands.guild_only()
+    @commands.is_owner()
     async def _load(self, ctx, *, extension_name):
         """Loads a module."""
         try:
@@ -63,6 +64,7 @@ class Owner(commands.Cog):
 
     @commands.command(name='unload', hidden=False)
     @commands.guild_only()
+    @commands.is_owner()
     async def _unload(self, ctx, *, extension_name):
         """Unloads a module."""
         try:
@@ -77,6 +79,7 @@ class Owner(commands.Cog):
 
     @commands.command(name='reload', hidden=False)
     @commands.guild_only()
+    @commands.is_owner()
     async def _reload(self, ctx, *, extension_name):
         """Reloads a module."""
         try:
@@ -90,23 +93,8 @@ class Owner(commands.Cog):
             await ctx.message.add_reaction(f"{ERROR_EMOJI}")
             await ctx.send(f"```py\n{type(e).__name__}: {e}\n```")
 
-    @commands.command()
-    @commands.guild_only()
-    async def runas(self, ctx, member: Union[discord.Member, discord.User], *, commandName: str):
-        """Runs as someone.
-        Credits: Adrian#1337
-        """
-        wait = await ctx.send(f"<{LOADING_EMOJI}> **`Wait for result.`**")
-        await asyncio.sleep(1)
-        await wait.delete()
-        fake_msg = copy.copy(ctx.message)
-        fake_msg._update(ctx.message.channel, dict(content=ctx.prefix + commandName))
-        fake_msg.author = member
-        new_ctx = await ctx.bot.get_context(fake_msg)
-        await ctx.bot.invoke(new_ctx)
-        await ctx.message.add_reaction(f"{SUCCESS_EMOJI}")
-
     @commands.command(hidden=True, name='eval', aliases=['exec'])
+    @commands.is_owner()
     async def _eval(self, ctx, *, body: str):
         """Evaluates a code.
         Credits: R. Danny made by Danny#0007
@@ -183,19 +171,8 @@ class Owner(commands.Cog):
                 embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=embed)
 
-    @commands.command(pass_context=True)
-    async def cleanup(self, ctx, count: int):
-        """Cleans up the bot's messages."""
-        async for m in ctx.channel.history(limit=count + 1):
-            if m.author.id == self.bot.user.id:
-                await m.delete()
-
-        wait = await ctx.send(f"<{LOADING_EMOJI}> **`Wait for result.`**")
-        await asyncio.sleep(1)
-        await wait.delete()
-        await ctx.send(f"<{SUCCESS_EMOJI}> **Cleared ​`{count}​` messages.**", delete_after=5)
-
     @commands.command(pass_context=True, hidden=True)
+    @commands.is_owner()
     async def emojis(self, ctx, *, guildID: int):
         """Takes information about the emojis from a server."""
         try:
@@ -216,6 +193,7 @@ class Owner(commands.Cog):
 
 
     @commands.guild_only()
+    @commands.is_owner()
     @commands.group(hidden=True, name="activity")
     async def _activity(self, ctx):
         """A command that changes status playing and more."""
@@ -223,6 +201,7 @@ class Owner(commands.Cog):
             await ctx.send(f'Incorrect block subcommand passed.')
 
     @commands.guild_only()
+    @commands.is_owner()
     @_activity.command()
     async def playing(self, ctx, *, activity: str):
         """Sets playing status in silent."""
@@ -230,6 +209,7 @@ class Owner(commands.Cog):
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
     @commands.guild_only()
+    @commands.is_owner()
     @_activity.command()
     async def watching(self, ctx, *, activity: str):
         """Sets watching status in silent."""
@@ -237,6 +217,7 @@ class Owner(commands.Cog):
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
     @commands.guild_only()
+    @commands.is_owner()
     @_activity.command()
     async def listening(self, ctx, *, activity: str):
         """Sets listening status in silent."""
@@ -244,6 +225,7 @@ class Owner(commands.Cog):
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
     @commands.guild_only()
+    @commands.is_owner()
     @_activity.command()
     async def streaming(self, ctx, url: str, *, activity: str):
         """Sets streaming status in silent."""
@@ -251,6 +233,7 @@ class Owner(commands.Cog):
         await ctx.message.add_reaction(SUCCESS_EMOJI)
         
     @commands.command(pass_context=True)
+    @commands.is_owner()
     @commands.guild_only()
     async def changelog(self, ctx, *, text: str):
         """Nothing here, lol."""
@@ -259,6 +242,7 @@ class Owner(commands.Cog):
         await channel.send(test)
     
     @commands.command(rest_is_raw=True, aliases=['say'])
+    @commands.is_owner()
     @commands.guild_only()
     async def echo(self, ctx, *, content):
         await ctx.message.delete()
