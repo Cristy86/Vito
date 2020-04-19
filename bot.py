@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 import asyncio
-import os
+import os, time
 import platform, psutil, pkg_resources
 from utils.settings import GREEN_EMBED
 from datetime import datetime
