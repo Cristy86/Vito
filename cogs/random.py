@@ -46,7 +46,7 @@ class Random(commands.Cog):
     async def is_bot(ctx):
        if ctx.author is ctx.author.bot:
             try:
-                break
+                return
             except Exception as e:
                 continue
     
