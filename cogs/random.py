@@ -42,14 +42,13 @@ class Random(commands.Cog):
             submission = next(x for x in softwaregore_submissions if not x.stickied)
         return submission.url
     
-    @commands.check
-    async def is_bot(ctx):
-       ctx.author.bot
+    def is_bot(ctx):
+       return ctx.author.bot == False
                 
     
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
-    @is_bot
+    @commands.check(is_bot)
     @commands.guild_only()
     async def random(self, ctx):
         """Chooses a random user."""
