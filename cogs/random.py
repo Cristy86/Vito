@@ -41,9 +41,10 @@ class Random(commands.Cog):
         for i in range(0, post_to_pick):
             submission = next(x for x in softwaregore_submissions if not x.stickied)
         return submission.url
+    
     def is_bot():
         def predicate(ctx):
-            if ctx.author.bot return
+            ctx.author.bot
         return commands.check(predicate)
     
     @commands.command()
