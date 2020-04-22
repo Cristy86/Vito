@@ -44,8 +44,7 @@ class Random(commands.Cog):
     
     @commands.check
     async def is_bot(ctx):
-       if ctx.author.bot:
-            return
+       if ctx.author is ctx.author.bot
     
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
