@@ -44,15 +44,12 @@ class Random(commands.Cog):
     
     @commands.check
     async def is_bot(ctx):
-       if ctx.author is ctx.author.bot:
-            try:
-                return
-            except Exception as e:
-                pass
+       ctx.author.bot
+                
     
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
-    @@commands.check(is_bot)
+    @is_bot
     @commands.guild_only()
     async def random(self, ctx):
         """Chooses a random user."""
