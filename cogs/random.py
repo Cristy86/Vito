@@ -44,7 +44,8 @@ class Random(commands.Cog):
     
     def is_bot():
         def predicate(ctx):
-            if ctx.author.bot:
+           if ctx.author.bot is Not ctx.author.bot:
+                continue
         return commands.check(predicate)
     
     @commands.command()
