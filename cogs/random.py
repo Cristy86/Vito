@@ -41,14 +41,18 @@ class Random(commands.Cog):
         for i in range(0, post_to_pick):
             submission = next(x for x in softwaregore_submissions if not x.stickied)
         return submission.url
-
+    def is_bot():
+        def predicate(ctx):
+            if ctx.author.bot:
+                return
+        return commands.check(predicate)
+    
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
+    @commands.is_bot()
     @commands.guild_only()
     async def random(self, ctx):
         """Chooses a random user."""
-        if ctx.author.bot:
-            return
         
         user = random.choice(ctx.guild.members)
         embed = discord.Embed(color=GREEN_EMBED)
