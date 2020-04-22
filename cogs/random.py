@@ -48,7 +48,7 @@ class Random(commands.Cog):
             try:
                 return
             except Exception as e:
-                continue
+                pass
     
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
