@@ -47,7 +47,7 @@ class Random(commands.Cog):
        if ctx.author is ctx.author.bot:
             try:
                 break
-            else:
+            except Exception as e:
                 continue
     
     @commands.command()
