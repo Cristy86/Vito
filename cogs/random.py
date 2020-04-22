@@ -49,7 +49,7 @@ class Random(commands.Cog):
     
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
-    @is_bot()
+    @is_bot
     @commands.guild_only()
     async def random(self, ctx):
         """Chooses a random user."""
