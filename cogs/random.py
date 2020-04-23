@@ -9,6 +9,7 @@ import aiohttp
 import humanize
 from datetime import datetime
 from utils.settings import GREEN_EMBED, ERROR_EMOJI
+import utils.checks
 from discord.ext.commands.cooldowns import BucketType
 
 class Random(commands.Cog):
@@ -48,7 +49,7 @@ class Random(commands.Cog):
     
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.guild_only()
     async def random(self, ctx):
         """Chooses a random user."""
