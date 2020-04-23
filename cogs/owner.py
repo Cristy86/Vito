@@ -262,7 +262,7 @@ class Owner(commands.Cog):
     @_blacklist.command()
     async def add(self, ctx, *, user: discord.Member):
         """Add a user to the blacklisted list."""
-        list = arr.array(i, BLUSERS)
+        list = arr.array('i', BLUSERS)
         list.append(user.id)
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
@@ -271,7 +271,7 @@ class Owner(commands.Cog):
     @_blacklist.command()
     async def remove(self, ctx, *, user: discord.Member):
         """Removes a user to the blacklisted list."""
-        list = arr.array(i, BLUSERS)
+        list = arr.array('i', BLUSERS)
         del list[BLUSERS]
         await ctx.message.add_reaction(SUCCESS_EMOJI)
 
