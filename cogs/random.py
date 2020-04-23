@@ -330,7 +330,7 @@ class Random(commands.Cog):
     @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def rps(self, ctx, *, comment: str):                                 
-        choices = ["Paper", "Scissors", "Rock"]
+        choices = ["Paper", "Scissors", "Rock", "rock", "paper", "scissors"]
         try:
             if comment not in choices:
               await ctx.send(f"<{ERROR_EMOJI}> You must choose:\n`Paper, Rock or Scissors.`")
