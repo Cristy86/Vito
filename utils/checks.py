@@ -9,4 +9,4 @@ def is_bot(ctx):
  return ctx.author.bot == False
 
 def is_blacklisted(ctx):
- return ctx.author.id =! BLUSERS 
+ return ctx.author.id not in BLUSERS 
