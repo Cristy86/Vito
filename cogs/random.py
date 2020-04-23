@@ -65,7 +65,7 @@ class Random(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.guild_only()
     async def dadjoke(self, ctx):
         """Says a dad joke."""
@@ -83,7 +83,7 @@ class Random(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1,5,BucketType.user)
-    @commands.check(is_bot)                               
+    @commands.check(utils.checks.is_bot)                               
     @commands.guild_only()
     async def dankmeme(self, ctx):
         """Shows a meme from r/memes."""
@@ -100,7 +100,7 @@ class Random(commands.Cog):
                                
     @commands.command()
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 10.0, commands.BucketType.user)
     async def softwaregore(self, ctx):
         """Generates a random r/softwaregore from reddit."""
@@ -116,7 +116,7 @@ class Random(commands.Cog):
                                    
     @commands.command(pass_context=True)
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 20.0, commands.BucketType.user)
     async def userinfo(self, ctx, user: discord.Member = None):
         """Shows information about a user."""
@@ -188,7 +188,7 @@ class Random(commands.Cog):
     
     @commands.has_permissions(ban_members=True)                              
     @commands.command()
-    @commands.check(is_bot)                               
+    @commands.check(utils.checks.is_bot)                              
     @commands.cooldown(1,7200,BucketType.guild)
     @commands.guild_only()
     async def suggest(self, ctx, *, text: str):
@@ -213,7 +213,7 @@ class Random(commands.Cog):
                                    
     @commands.command(pass_context=True)
     @commands.guild_only()
-    @commands.check(is_bot)                               
+    @commands.check(utils.checks.is_bot)                               
     @commands.cooldown(1.0, 3600, commands.BucketType.user)
     async def webhook(self, ctx, user:discord.Member=None, *, text: str):
         """Makes an webhook and sends text as an user."""
@@ -235,7 +235,7 @@ class Random(commands.Cog):
            await ctx.message.add_reaction("❌")
                                    
     @commands.command()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.guild_only()
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def dog(self, ctx):
@@ -257,7 +257,7 @@ class Random(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def cat(self, ctx):
         """Generates a random image cat."""
@@ -279,7 +279,7 @@ class Random(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def fox(self, ctx):
         """Generates a random image fox."""
@@ -300,7 +300,7 @@ class Random(commands.Cog):
                                    
     @commands.command()
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def hownonce(self, ctx, user: discord.Member = None):
         """How much of an nonce he is?"""
@@ -328,7 +328,7 @@ class Random(commands.Cog):
     
     @commands.command(name="8ball")
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def _ball(self, ctx, *, question:str):
         """8ball, what did you expect?"""
@@ -340,7 +340,7 @@ class Random(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def rps(self, ctx, *, comment: str):
         """Rock, paper, scissors!"""
@@ -358,7 +358,7 @@ class Random(commands.Cog):
                                    
     @commands.command(pass_context=True)
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.cooldown(1.0, 30.0, commands.BucketType.user)
     async def ichoose(self, ctx, choiceone, choicetwo, choicethree):
         """Say three things and I'll choose!"""
@@ -370,7 +370,7 @@ class Random(commands.Cog):
                                    
     @commands.command(pass_context=True)
     @commands.guild_only()
-    @commands.check(is_bot)
+    @commands.check(utils.checks.is_bot)
     @commands.is_owner()
     @commands.cooldown(1.0, 20.0, commands.BucketType.user)
     async def pressf(self, ctx):
