@@ -14,9 +14,10 @@ from collections import Counter
 from platform import python_version
 import copy
 import os
-from utils.settings import OWNERS, GREEN_EMBED, ERROR_EMOJI, SUCCESS_EMOJI, LOADING_EMOJI
+from utils.settings import OWNERS, GREEN_EMBED, ERROR_EMOJI, SUCCESS_EMOJI, LOADING_EMOJI, BLUSERS
 import time
 from typing import Union
+import array as arr
 
 class Owner(commands.Cog):
     """Owner-only commands that make the bot dynamic."""
@@ -248,5 +249,32 @@ class Owner(commands.Cog):
         await ctx.message.delete()
         await ctx.send(content)
 
+    @commands.guild_only()
+    @commands.is_owner()
+    @commands.group(hidden=True, name="blacklist")
+    async def _blacklist(self, ctx):
+        """A command that changes status playing and more."""
+        if ctx.invoked_subcommand is None:
+            await ctx.send(f'Incorrect block subcommand passed.')
+
+    @commands.guild_only()
+    @commands.is_owner()
+    @_blacklist.command()
+    async def add(self, ctx, *, user: discord.Member):
+        """Add a user to the blacklisted list."""
+        list = arr.array(BLUSERS)
+        list.append(user.id)
+        await ctx.message.add_reaction(SUCCESS_EMOJI)
+
+    @commands.guild_only()
+    @commands.is_owner()
+    @_blacklist.command()
+    async def remove(self, ctx, *, user: discord.Member):
+        """Removes a user to the blacklisted list."""
+        list = arr.array(BLUSERS)
+        del list[BLUSERS]
+        await ctx.message.add_reaction(SUCCESS_EMOJI)
+
+        
 def setup(bot):
     bot.add_cog(Owner(bot))
