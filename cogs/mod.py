@@ -18,6 +18,7 @@ import random
 from datetime import datetime
 import psutil
 from utils.settings import ERROR_EMOJI, SUCCESS_EMOJI, GREEN_EMBED
+import utils.checks
 
 class Moderation(commands.Cog):
     """Mod-only commands for the bot."""
@@ -27,11 +28,10 @@ class Moderation(commands.Cog):
     
     @commands.has_permissions(manage_messages=True)
     @commands.guild_only()
+    @commands.check(utils.checks.is_bot)
     @commands.command(pass_context=True)
     async def clear(self, ctx, num: int, target:discord.Member = None):
         """Clears X messages."""  
-        if ctx.author.bot:
-            return
         if num>500 or num<0:
             await ctx.send (f"<{ERROR_EMOJI}> Invalid amount. Maximum is `500`.")
             return
@@ -50,21 +50,30 @@ class Moderation(commands.Cog):
 
     @commands.has_permissions(kick_members=True)
     @commands.guild_only()
+    @commands.check(utils.checks.is_bot)
     @commands.command(pass_context=True)
     async def kick(self, ctx, user: discord.Member = None, *, reason: str = None):
         """Kicks a member with an reason."""      
         if user is None:
-            return await ctx.send(f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]")
-        if ctx.author.bot:
-            return
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]"
+            return await ctx.send(embed=embed)
         if self.bot.owner_id == user.id:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't kick the owner of this bot.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't kick the owner of this bot."
+            return await ctx.send(embed=embed)
         if user == ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't kick guild owner.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't kick guild owner."
+            return await ctx.send(embed=embed)
         if ctx.me.top_role <= user.top_role:
-            return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't kick `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't kick `{user}`."
+            return await ctx.send(embed=embed)
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't kick `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't kick `{user}`."
+            return await ctx.send(embed=embed)
         if reason is None:
             reason = 'No reason.'
         
@@ -86,21 +95,30 @@ class Moderation(commands.Cog):
     
     @commands.has_permissions(ban_members=True)
     @commands.guild_only()
+    @commands.check(utils.checks.is_bot)
     @commands.command(pass_context=True)
     async def softban(self, ctx, user: discord.Member = None, *, reason: str = None):
         """Bans a user and then unbans the user.."""
         if user is None:
-            return await ctx.send(f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]")
-        if ctx.author.bot:
-            return
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]"
+            return await ctx.send(embed=embed)
         if self.bot.owner_id == user.id:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't softban the owner of this bot.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't softban the owner of this bot."
+            return await ctx.send(embed=embed)
         if user == ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't softban guild owner.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't softban guild owner."
+            return await ctx.send(embed=embed)
         if ctx.me.top_role <= user.top_role:
-            return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't softban `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't softban `{user}`."
+            return await ctx.send(embed=embed)
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't softban `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't softban `{user}`."
+            return await ctx.send(embed=embed)
         if reason is None:
             reason = 'No reason.'
         
@@ -124,21 +142,30 @@ class Moderation(commands.Cog):
 
     @commands.has_permissions(ban_members=True)
     @commands.guild_only()
+    @commands.check(utils.checks.is_bot)
     @commands.command(pass_context=True)
     async def ban(self, ctx, user: discord.Member = None, *, reason: str = None):
         """Bans an user.."""      
         if user is None:
-            return await ctx.send(f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]")
-        if ctx.author.bot:
-            return
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]"
+            return await ctx.send(embed=embed)
         if self.bot.owner_id == user.id:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't ban the owner of this bot.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't ban the owner of this bot."
+            return await ctx.send(embed=embed)
         if user == ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't ban guild owner.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't ban guild owner."
+            return await ctx.send(embed=embed)
         if ctx.me.top_role <= user.top_role:
-            return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't ban `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't ban `{user}`."
+            return await ctx.send(embed=embed)
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't ban `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't ban `{user}`."
+            return await ctx.send(embed=embed)
         if reason is None:
             reason = 'No reason.'
         
@@ -160,16 +187,13 @@ class Moderation(commands.Cog):
 
     @commands.has_permissions(manage_guild=True)
     @commands.guild_only()
+    @commands.check(utils.checks.is_bot)
     @commands.command(pass_context=True)
     async def poll(self, ctx, *, text: str):
         """Starts a poll with text."""
-        
-        if ctx.author.bot:
-            return
-        
         embed = discord.Embed(color=GREEN_EMBED)
         embed.title = "Public poll"
-        embed.description = f"The member from the administration team {ctx.author} has made a public poll to see if you like it or not!\n\n{text}"
+        embed.description = f"The member from the administration team, `{ctx.author}` has made a public poll to see if you like it or not!\n\n{text}"
         embed.set_thumbnail(url=ctx.author.avatar_url)
         embed.set_footer(text=self.bot.user.name)
         embed.timestamp = datetime.utcnow()
@@ -180,25 +204,36 @@ class Moderation(commands.Cog):
 
     @commands.has_permissions(manage_guild=True)
     @commands.guild_only()
+    @commands.check(utils.checks.is_bot)
     @commands.command(pass_context=True)
     async def warn(self, ctx, logChannel: discord.TextChannel = None, user: discord.Member = None, *, reason: str = None):
         """Warns an user."""
         if user is None:
-            return await ctx.send(f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]")
-        if ctx.author.bot:
-            return
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]"
+            return await ctx.send(embed=embed)
         if self.bot.owner_id == user.id:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't warn the owner of this bot.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't warn the owner of this bot."
+            return await ctx.send(embed=embed)
         if user == ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't warn guild owner.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't warn guild owner."
+            return await ctx.send(embed=embed)
         if ctx.me.top_role <= user.top_role:
-            return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't warn `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't warn `{user}`."
+            return await ctx.send(embed=embed)
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't warn `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't warn `{user}`."
+            return await ctx.send(embed=embed)
         if reason is None:
             reason = 'No reason.'
         if logChannel is None:
-            return await ctx.send(f"<{ERROR_EMOJI}> I need a channel. [example: #general]")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> I need a channel. [example: #general]"
+            return await ctx.send(embed=embed)
         
         embed = discord.Embed(color=GREEN_EMBED)
         embed.title = "Alert System"
@@ -226,6 +261,7 @@ class Moderation(commands.Cog):
 
     @commands.group()
     @commands.guild_only()
+    @commands.check(utils.checks.is_bot)
     @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx):
         """Displays you some mute commands."""
@@ -233,21 +269,29 @@ class Moderation(commands.Cog):
                 await ctx.send(f'<{ERROR_EMOJI}> Incorrect random subcommand passed. Try {ctx.prefix} help mute')
     
     @mute.command()
+    @commands.check(utils.checks.is_bot)
     @commands.has_permissions(manage_channels=True)
     async def add(self, ctx, user: discord.Member, *, reason: str = None):
         """Mutes an user."""
         if user is None:
-            return await ctx.send(f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]")
-        if ctx.author.bot:
-            return
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]"
         if self.bot.owner_id == user.id:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't mute the owner of this bot.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't mute the owner of this bot."
+            return await ctx.send(embed=embed)
         if user == ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't mute guild owner.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't mute guild owner."
+            return await ctx.send(embed=embed)
         if ctx.me.top_role <= user.top_role:
-            return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't mute `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't mute `{user}`."
+            return await ctx.send(embed=embed)
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't mute `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't mute `{user}`."
+            return await ctx.send(embed=embed)
         if reason is None:
             reason = 'No reason.'
         await ctx.channel.set_permissions(user,         read_messages=True,
@@ -256,7 +300,7 @@ class Moderation(commands.Cog):
         try:
             embed = discord.Embed(color=GREEN_EMBED)
             embed.title = "Alert System"
-            embed.description = f"Looks like you got muted.. \N{FACE WITHOUT MOUTH}"
+            embed.description = f"Looks like you got muted in one of the channels... \N{FACE WITHOUT MOUTH}"
             embed.add_field(name="`Moderator`", value=ctx.author)
             embed.add_field(name="`Reason`", value=reason)
             embed.add_field(name="`Guild`", value=ctx.guild)
@@ -270,21 +314,30 @@ class Moderation(commands.Cog):
     
     
     @mute.command()
+    @commands.check(utils.checks.is_bot)
     @commands.has_permissions(manage_channels=True)
     async def remove(self, ctx, user: discord.Member, *, reason: str = None):
         """Unmutes an user."""
         if user is None:
-            return await ctx.send(f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]")
-        if ctx.author.bot:
-            return
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> That's not a user. [example: @User#1111]"
+            return await ctx.send(embed=embed)
         if self.bot.owner_id == user.id:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't unmute the owner of this bot.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't unmute the owner of this bot."
+            return await ctx.send(embed=embed)
         if user == ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Can't unmute guild owner.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Can't unmute guild owner."
+            return await ctx.send(embed=embed)
         if ctx.me.top_role <= user.top_role:
-            return await ctx.send(f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't unmute `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> My role is lower or equal to member's role, can't unmute `{user}`."
+            return await ctx.send(embed=embed)
         if ctx.author.top_role <= user.top_role and ctx.author != ctx.guild.owner:
-            return await ctx.send(f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't unmute `{user}`.")
+            embed = discord.Embed(color=GREEN_EMBED)
+            embed.description = f"<{ERROR_EMOJI}> Your role is lower or equal to member's role. Can't unmute `{user}`."
+            return await ctx.send(embed=embed)
         if reason is None:
             reason = 'No reason.'
         await ctx.channel.set_permissions(user,         read_messages=True,
