@@ -10,4 +10,4 @@ CHANNEL2 = 576406400385810452
 from discord import Colour
 GREEN_EMBED = 0x80ff80
 GREY_EMBED = Colour.dark_grey()
-blusers = []
+BLUSERS = []
