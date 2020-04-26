@@ -37,9 +37,9 @@ class CommandErrorHandler(commands.Cog):
             
 
         elif isinstance(error, commands.CheckFailure):
-            embed = discord.Embed(color=GREEN_EMBED)
-            embed.description = f"<{ERROR_EMOJI}> Oh! I am sorry. {error}.. Maybe that means that you failed a check that prevents you from using it!"
-            return await ctx.send(embed=embed)
+                embed = discord.Embed(color=GREEN_EMBED)
+                embed.description = f"<{ERROR_EMOJI}> Oh! I am sorry, a check failed. `{error}`"
+                return await ctx.send(embed=embed)
 
         elif isinstance(error, commands.CommandInvokeError):
             embed = discord.Embed(color=GREEN_EMBED)
@@ -58,7 +58,7 @@ class CommandErrorHandler(commands.Cog):
         
         elif isinstance(error, commands.CommandOnCooldown):
             embed = discord.Embed(color=GREEN_EMBED)
-            embed.description = f"<{ERROR_EMOJI}> {error}.\n\n`STOP!`\nHold it right there. You might be confused. ***7200 seconds?? What does that mean??***\nYes, it can be confusing but Vito will send you some sites to calculate the time the bot gave because of the cooldown! Goodluck!\n[Convert seconds to minutes.](https://www.checkyourmath.com/convert/time/seconds_minutes.php)\n[Convert seconds to hours.](https://www.checkyourmath.com/convert/time/seconds_hours.php)"
+            embed.description = f"<{ERROR_EMOJI}> {error}.\n\nHold it right there. Did you get a long cooldown? If so, you might be confused but..\nYou can just convert the seconds..\n[Convert seconds to minutes.](https://www.checkyourmath.com/convert/time/seconds_minutes.php)\n[Convert seconds to hours.](https://www.checkyourmath.com/convert/time/seconds_hours.php)"
             return await ctx.send(embed=embed)
         
         elif isinstance(error, commands.NotOwner):
