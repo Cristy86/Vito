@@ -3,7 +3,7 @@ from discord.ext import commands
 
 import asyncio
 import os, time
-import platform, psutil, pkg_resources
+import platform, psutil, pkg_resources, humanize
 from utils.settings import GREEN_EMBED
 from datetime import datetime
 from discord.ext.commands.cooldowns import BucketType
