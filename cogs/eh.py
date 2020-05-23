@@ -3,8 +3,8 @@ import sys
 from discord.ext import commands
 from utils.settings import GREEN_EMBED, ERROR_EMOJI
 import discord
-
-
+import humanize
+import datetime
 
 class CommandErrorHandler(commands.Cog):
     def __init__(self, bot):
@@ -53,12 +53,14 @@ class CommandErrorHandler(commands.Cog):
         
         elif isinstance(error, commands.UserInputError):
             embed = discord.Embed(color=GREEN_EMBED)
-            embed.description = f"<{ERROR_EMOJI}> There was a error that is unexpected, please report this to the owner. (c_ristian#0126)\n\n`{error}`"
+            embed.description = f"<{ERROR_EMOJI}> `{error}`"
             return await ctx.send(embed=embed)
         
         elif isinstance(error, commands.CommandOnCooldown):
+            test = error.retry_after
+            test = round(test, 2)
             embed = discord.Embed(color=GREEN_EMBED)
-            embed.description = f"<{ERROR_EMOJI}> {error}.\n\nHold it right there. Did you get a long cooldown? If so, you might be confused but..\nYou can just convert the seconds..\n[Convert seconds to minutes.](https://www.checkyourmath.com/convert/time/seconds_minutes.php)\n[Convert seconds to hours.](https://www.checkyourmath.com/convert/time/seconds_hours.php)"
+            embed.description = f"<{ERROR_EMOJI}> Try again after {humanize.naturaldelta(datetime.timedelta(seconds=test))}."
             return await ctx.send(embed=embed)
         
         elif isinstance(error, commands.NotOwner):
