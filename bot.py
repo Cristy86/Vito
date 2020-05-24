@@ -29,8 +29,7 @@ async def _stats(ctx):
     """Shows the stats about the bot."""
     if ctx.author.bot:
         return                                                    
-    await ctx.trigger_typing()
-    time_delta = round((t_2-t_1)*1000)                                                    
+    await ctx.trigger_typing()                                                   
     delta_uptime = datetime.utcnow() - bot.launch_time
     hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
