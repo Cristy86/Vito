@@ -8,7 +8,7 @@ from utils.settings import GREEN_EMBED
 from datetime import datetime
 from discord.ext.commands.cooldowns import BucketType
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')), owners=[339752841612623872, 387720186863550464])
+bot = commands.Bot(command_prefix=commands.when_mentioned_or(os.getenv('BOT_PREFIX')), owners=[387720186863550464])
 bot.launch_time = datetime.utcnow()
 startup_extensions = ['cogs.owner','cogs.webhook','cogs.random','cogs.eh', 'cogs.mod', 'jishaku']
 
