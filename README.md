@@ -1,5 +1,6 @@
 # Vito
+[![forthebadge](https://forthebadge.com/images/badges/it-works-why.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
 
-Hi! My name is Vito and I am a personal bot made by Cristian. And I am at least featured in some servers but I am a personal server bot too! This bot cannot be invited to other servers without the owner's permission! I do not have many commands, I am a bot used for suggestions, polls and a bit of moderation. That's all!
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
-- If you need to contact me, this is my discord: encezo#0126 (yes.)
+Vito is discontinued.
